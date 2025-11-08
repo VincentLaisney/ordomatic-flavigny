@@ -352,18 +352,19 @@ text_ordo += "\n\\ApplyParBox{2cm}{}\n\\ApplyHebdoPsalt{\\textbf{Post Nonam expl
     str(year - 1) + "-" + str(year) + "}}"
 
 # Jubilés :
-text_ordo += "\n\n\\newpage"
-text_ordo += "\n\n\\thispagestyle{empty}"
-text_ordo += "\n\\ApplyParBox{3cm}{}"
-text_ordo += "\n\\ApplyGenerTitleHuge{IUBILÆUM}\\vspace{1cm}"
-text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno celebrabunt:}"
-text_ordo += "\n\\begin{center}"
-text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
-text_ordo += "\nDie 13 aprilis 2025 :\\par"
-text_ordo += "\nR.~P. Emmanuel Maria \\textsc{Vernet} (50 Prof.)\\vspace{0.5cm}\\par"
-text_ordo += "\nDie 15 augusti 2025 :\\par"
-text_ordo += "\nR.~P. Thomas Maria \\textsc{Guérard} (50 Prof.)\\par"
-text_ordo += "\n\\end{center}"
+if (year == 2026):
+    text_ordo += "\n\n\\newpage"
+    text_ordo += "\n\n\\thispagestyle{empty}"
+    text_ordo += "\n\\ApplyParBox{3cm}{}"
+    text_ordo += "\n\\ApplyGenerTitleHuge{IUBILÆUM}\\vspace{1cm}"
+    text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno celebrabunt:}"
+    text_ordo += "\n\\begin{center}"
+    text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
+    text_ordo += "\nDie 6 martii 2026 :\\par"
+    text_ordo += "\nFrater Gabriel Maria \\textsc{Delaunay} (50 Prof.)\\vspace{0.5cm}\\par"
+    text_ordo += "\nDie 21 iulii 2026 :\\par"
+    text_ordo += "\nR.~P. Dominicus Maria \\textsc{Vernet} (50 Prof.)\\par"
+    text_ordo += "\n\\end{center}"
 
 # End of document :
 text_ordo += "\n\n\\end{document}"
