@@ -23,8 +23,8 @@ dict_sancto = dict_sancto_create(
     year, even_year, year_letter, dict_tempo, date_paques, nb_dim_ap_pentec)
 
 # Entrer ici les dates des MC votives semailles et récoltes :
-date_semailles = datetime.date(year, 5, 28)
-date_recoltes = datetime.date(year, 9, 24)
+date_semailles = datetime.date(year, 5, 12)
+date_recoltes = datetime.date(year, 9, 22)
 
 text_ordo = "\\input{../latex/config.tex}"
 text_ordo += "\n\\fancyhead[CO]{\\textbf{Cyclus liturgicus " + \
