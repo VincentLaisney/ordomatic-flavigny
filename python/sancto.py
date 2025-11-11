@@ -424,6 +424,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     presentation["anniv"] = "Cras celebratur dies ad vitam religiosam atque ad vocationes ecclesiasticas petendas dedicata."
     # Si dimanche, il faut calculer quel dimanche c'est dans la forme extraordinaire (dans la forme ordinaire, c'est forcément le IVe dim. Per annum).
     if presentation_date.weekday() == 6:
+        presentation["I_vesp"] = "\n\\item I Vesperæ festi sequentis."
         pres_dim = " \\textbf{\\textsc{Dominica IV per annum}}"
         if presentation_date.day == paques - datetime.timedelta(days=63):
             pres_dim += " (Septuagesima)"
@@ -1880,6 +1881,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     sainte_croix["force"] = 90
     # Si tombe un dimanche, on calcule quel dimanche (per annum, post Pentecosten) :
     if sainte_croix_date.weekday() == 6:
+        sainte_croix["I_vesp"] = "\n\\item I Vesperæ festi sequentis."
         num_dim_ap_pentec = (sainte_croix_date - pentecote).days // 7
         num_dim_per_annum = f_roman_numbers(
             num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
@@ -2303,6 +2305,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     dedicace_latran["force"] = 90
     # Si tombe un dimanche, on calcule quel dimanche (per annum, post Pentecosten).
     if dedicace_latran_date.weekday() == 6:
+        dedicace_latran["I_vesp"] = "\n\\item I Vesperæ festi sequentis."
         num_dim_ap_pentec = (dedicace_latran_date - pentecote).days // 7
         num_dim_per_annum = f_roman_numbers(
             num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
