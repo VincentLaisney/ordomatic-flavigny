@@ -2329,9 +2329,12 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         lectures_mc = "Ez \\textbf{47}, 1-2.8-9.12"
     # Vêpres:
     text_vepres = "\n\\item Vesperæ festi." if dedicace_latran_date.weekday() == 5 else ""
-    dedicace_latran["body"] = "\n\\item Ad Vigilias: in II Nocturno, lectiones de commune Dedicationis ecclesiæ in II Nocturno.\n\\item \\textit{In ML: præfatio de dedicatione ecclesiæ.}\n\\item In MC: lectiones propriæ: " + \
+    dedicace_latran["body"] = "\n\\item Ad Vigilias: in II Nocturno, lectiones de commune Dedicationis ecclesiæ in II Nocturno." if even_year else ""
+    dedicace_latran["body"] += "\n\\item \\textit{In ML: præfatio de dedicatione ecclesiæ.}\n\\item In MC: lectiones propriæ: " + \
         lectures_mc + \
         " / Io \\textbf{2}, 13-22; præfatio de dedicatione ecclesiæ II." + text_vepres
+    if dedicace_latran_date.weekday() == 6:
+        dedicace_latran["body"] += "\n\\item Ad Vigilias in feriis hebdomadæ II novembris : lectiones I Nocturni sumuntur in supplemento 52*."
 
     saint_leon_date = datetime.date(current_year, 11, 10)
     saint_leon = dict_sancto[saint_leon_date] = {}
