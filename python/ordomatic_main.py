@@ -237,6 +237,16 @@ for i in range(nb_days):
         dict_new_day["lectiones_body"] = ""
     if "preface_feries" not in dict_new_day:
         dict_new_day["preface_feries"] = ""
+    #Numérations alternatives pour les dimanches
+    if "alt_header" in dict_new_day and "()" in dict_new_day["header"]:
+        if new_day_date in dict_sancto and i != 0:
+            if dict_sancto[new_day_date]["force"] < dict_new_day["force"]:
+                dict_new_day["alt_header"] = re.sub(r'^[^\-]* - ', "", dict_new_day["alt_header"])
+                dict_new_day["header"] = dict_new_day["header"].replace("()", "(" + dict_new_day["alt_header"] +")")
+        else:
+            dict_new_day["alt_header"] = re.sub(r'^[^\-]* - ', "", dict_new_day["alt_header"])
+            dict_new_day["header"] = dict_new_day["header"].replace("()", "(" + dict_new_day["alt_header"] +")")
+
     if new_day_date in dict_sancto and i != 0:
         dict_new_day_sancto = dict_sancto[new_day_date].copy()
         if "anniv" in dict_new_day_sancto:
@@ -249,6 +259,9 @@ for i in range(nb_days):
             dict_new_day["I_vesp"] = dict_new_day_sancto["I_vesp"] if "I_vesp" in dict_new_day_sancto else ""
             dict_new_day["header"] = dict_new_day_sancto["header"] if "header" in dict_new_day_sancto else ""
             dict_new_day["body"] = dict_new_day_sancto["body"] if "body" in dict_new_day_sancto else ""
+            #Numérations des dimanches
+            if "alt_header" in dict_new_day and "()" in dict_new_day["header"]:
+                dict_new_day["header"] = dict_new_day["header"].replace("()", "(" + dict_new_day["alt_header"] +")")
             # Si pas vendredi du TP (férie ou mém. mineure, pour lesquelles il faut garder l'antienne spéciale),
             # on remplace les IIe Vêpres du tempo par celles du sancto :
             if not (new_day_date > date_paques and new_day_date < date_paques + datetime.timedelta(days=39) and ("de ea" in dict_new_day["header"] or "minor" in dict_new_day["header"])):
@@ -368,6 +381,10 @@ if (year == 2026):
 
 # End of document :
 text_ordo += "\n\n\\end{document}"
+
+# Suppression des parenthèses restantes des f^etes 
+text_ordo = text_ordo.replace("()", "")
+text_ordo = text_ordo.replace("((", "")
 
 # Espaces avant les signes de ponctuation doubles :
 text_ordo = re.sub(r'([;:!?])', r'~\1', text_ordo)

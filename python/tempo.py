@@ -720,7 +720,7 @@ def dict_tempo_create(current_year, even_year, year_letter):
         dim_ap_paques["num_day"] = "\\textbf{" + \
             str(dim_ap_paques_date.day) + "} & " + dim_ap_paques["symbols"] + " \\textbf{\\textsc{Dominica}}"
         dim_ap_paques["header"] = (" \\textbf{\\textsc{" + f_roman_numbers(i + 2) + " Paschæ}} (seu Dominica " + f_roman_numbers(
-            i + 1) + " post Pascha) - de ea - \\textit{Alb.}") if i != 0 else " \\textbf{\\textsc{Dominica II Paschæ}} seu \\textbf{\\textsc{De Divina Misericordia}} (Dominica in Albis) - de ea - \\textit{Alb.}"
+            i + 1) + " post Pascha) - de ea - \\textit{Alb.}") if i != 0 else " \\textbf{\\textsc{II Paschæ}} seu \\textbf{\\textsc{De Divina Misericordia}} (Dominica in Albis) - de ea - \\textit{Alb.}"
         dim_ap_paques["symbols"] = ""
         dim_ap_paques["body"] = ""
         if i == 0:
@@ -969,8 +969,8 @@ def dict_tempo_create(current_year, even_year, year_letter):
             new_dim["symbols"] = "".join(f_symbols(new_dim_date))
             new_dim["num_day"] = "\\textbf{" + str(new_dim_date.day) + "} & " + new_dim["symbols"] + " \\textbf{\\textsc{Dominica}}"
             new_dim["header"] = " \\textbf{\\textsc{" + num_dim_per_annum + \
-                " per annum}} (" + forme_extra + ")" + \
-                " - de ea - \\textit{Vir.}"
+                " per annum}} () - de ea - \\textit{Vir.}"
+            new_dim["alt_header"] = num_dim_per_annum + " per annum - " + forme_extra
             new_dim["symbols"] = ""
             new_dim["body"] = comment_septua + "\n\\item In MC: præfatio " + num_pref_dim + " de dominicis." + \
                 ("\n\\item Ad benedictionem Sanctissimi Sacramenti, post canticum expositionis, cantatur \\textit{Ubi Caritas} in Besnier 275 (hebdomada pro christianorum unitate)." if new_dim_date.day <
@@ -1128,9 +1128,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
                 new_dim["symbols"] = "".join(f_symbols(new_dim_date))
                 new_dim["num_day"] = "\\textbf{" + \
                     str(new_dim_date.day) + "} & " + new_dim["symbols"] + " \\textbf{\\textsc{Dominica}}"
+                new_dim["alt_header"] = num_dim_per_annum + " per annum - " + num_dim_ap_pentec + \
+                    num_summer
                 new_dim["header"] = " \\textbf{\\textsc{" + num_dim_per_annum + \
-                    " per annum}} (" + num_dim_ap_pentec + \
-                    num_summer + ")" + " - de ea - \\textit{Vir.}"
+                    " per annum}} ()" + " - de ea - \\textit{Vir.}"
                 new_dim["symbols"] = ""
                 if i == 2:
                     body_special = "\n\\item Officium totum dicitur ut in dominicis per annum, præter antiphonas ad Benedictus et Magnificat in AM 557-558."
