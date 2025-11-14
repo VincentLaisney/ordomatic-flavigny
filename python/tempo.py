@@ -38,11 +38,12 @@ def dict_tempo_create(current_year, even_year, year_letter):
         new_dim_adv["I_vesp"] = "\\item I Vesperæ dominicæ sequentis."
         new_dim_adv["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
             (new_dim_adv_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-        new_dim_adv["num_day"] = "\\textbf{" + \
-            str(new_dim_adv_date.day) + "} &"
         new_dim_adv["symbols"] = "".join(f_symbols(new_dim_adv_date))
-        new_dim_adv["header"] = " \\textbf{\\textsc{Dominica " + f_roman_numbers(
+        new_dim_adv["num_day"] = "\\textbf{" + \
+            str(new_dim_adv_date.day) + "} & " + new_dim_adv["symbols"] + " \\textbf{\\textsc{Dominica}}"
+        new_dim_adv["header"] = " \\textbf{\\textsc{" + f_roman_numbers(
             i + 1) + " Adventus}} - de ea - \\textit{Viol.}"
+        new_dim_adv["symbols"] = ""
         new_dim_adv["body"] = (
             "\\item Ad Vigilias: post lectiones I Nocturni, dicitur ¶ lectionis 1 \\textit{Aspiciens a longe}.\n\\item In MC: Missa concluditur benedictione sollemni." if i == 0 else "")
         current_lectiones = lectiones["hebdo_" + str(i + 1) + "_adv"]
@@ -90,9 +91,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
     dim_3_adv["I_vesp"] = "\\item I Vesperæ dominicæ sequentis."
     dim_3_adv["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
         (dim_3_adv_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-    dim_3_adv["num_day"] = "\\textbf{" + str(dim_3_adv_date.day) + "} &"
     dim_3_adv["symbols"] = "".join(f_symbols(dim_3_adv_date))
-    dim_3_adv["header"] = " \\textbf{\\textsc{Dominica III Adventus}, Gaudete} - de ea - \\textit{Viol.}"
+    dim_3_adv["num_day"] = "\\textbf{" + str(dim_3_adv_date.day) + "} & " + dim_3_adv["symbols"] + " \\textbf{\\textsc{Dominica}}"
+    dim_3_adv["header"] = " \\textbf{\\textsc{III Adventus}, Gaudete} - de ea - \\textit{Viol.}"
+    dim_3_adv["symbols"] = ""
     dim_3_adv["body"] = txt_vigiles + \
         "\\item Hodie pulsantur organa ad Missam, non vero in aliis Horis."
     # Lectures jusqu'au 17 :
@@ -181,9 +183,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
     dim_4_adv["I_vesp"] = "\\item I Vesperæ dominicæ sequentis (AM 226)."
     dim_4_adv["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
         (dim_4_adv_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-    dim_4_adv["num_day"] = "\\textbf{" + str(dim_4_adv_date.day) + "} &"
     dim_4_adv["symbols"] = "".join(f_symbols(dim_4_adv_date))
-    dim_4_adv["header"] = " \\textbf{\\textsc{Dominica IV Adventus}} - de ea - \\textit{Viol.}"
+    dim_4_adv["num_day"] = "\\textbf{" + str(dim_4_adv_date.day) + "} & " + dim_4_adv["symbols"] + " \\textbf{\\textsc{Dominica}}"
+    dim_4_adv["header"] = " \\textbf{\\textsc{IV Adventus}} - de ea - \\textit{Viol.}"
+    dim_4_adv["symbols"] = ""
     if dim_4_adv_date.day == 21:
         ant_bened_special = "\n\\item Ad Benedictus: ø \\textit{Nolite timere (AM 219)}."
     elif dim_4_adv_date.day == 23:
@@ -255,8 +258,8 @@ def dict_tempo_create(current_year, even_year, year_letter):
     noel["generalities"] = "\n\\ApplyGenerSubTitle{Ad mensam}\n\\ApplyGenerList{\\item Benedictio de Nativitate.}" + (
         "\n\\vspace{1cm}" if noel_date.weekday() != 6 else "")  # Car si dimanche, alors "Hebdomada n psalterii", et du coup espace.
     noel["num_day"] = "\\textbf{" + str(noel_date.day) + "} & " + \
-        f_transf_weekday(noel_date.weekday())
-    noel["header"] = ("Dominica - " if noel_date.weekday() == 6 else " - ") + \
+        f_transf_weekday(noel_date.weekday()) + ("\\textbf{\\textsc{Dominica}}" if noel_date.weekday() == 6 else "")
+    noel["header"] = " - " + \
         "¬ \\textbf{\\MakeUppercase{In Nativitate Domini Nostri Iesu Christi} - sollemnitas maior cum octava} - \\textit{Alb}."
     noel["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[((noel_date - datetime.date(
         2011, 11, 27)).days // 7) % 2] + " psalterii -" if noel_date.weekday() == 6 else ""
@@ -292,8 +295,9 @@ def dict_tempo_create(current_year, even_year, year_letter):
     ) == 6 else ""
     ste_famille["hebdo_psalt"] = ("- Hebdomada " + hebdo_psalterii[((ste_famille_date - datetime.date(
         2011, 11, 27)).days // 7) % 2] + " psalterii -") if ste_famille_date.weekday() == 6 else ""
-    ste_famille["header"] = " \\textbf{\\textsc{" + ("Dominica I post nativitatem - " if noel_weekday !=
-                                                     6 else "\\textnormal{Feria VI - }") + "Sanctæ Familiæ Iesu, Mariæ et Ioseph}} - \\textbf{festum} - \\textit{Alb}."
+    ste_famille["header"] = " \\textbf{\\textsc{" + ("Dominica " if noel_weekday !=
+        6 else "\\textnormal{Feria VI - }") + "Sanctæ Familiæ Iesu, Mariæ et Ioseph}} " + \
+        ("(I post nativitatem)" if noel_weekday != 6 else "") + " - \\textbf{festum} - \\textit{Alb}."
     # Hebdo_psalt_vigiles:
     hebdo_psalt_vigiles = "\n\\item Ad Vigilias: psalmi anni {}.".format(
         hebdo_psalterii_inv[even_year])
@@ -354,10 +358,11 @@ def dict_tempo_create(current_year, even_year, year_letter):
     dim_2_ap_noel["I_vesp"] = "\\item I Vesperæ dominicæ sequentis (AM 265)."
     dim_2_ap_noel["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
         (dim_2_ap_noel_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-    dim_2_ap_noel["num_day"] = "\\textbf{" + \
-        str(dim_2_ap_noel_date.day) + "} &"
     dim_2_ap_noel["symbols"] = "".join(f_symbols(dim_2_ap_noel_date))
-    dim_2_ap_noel["header"] = " \\textbf{\\textsc{Dominica II post Nativitatem}} - de ea - \\textit{Alb}."
+    dim_2_ap_noel["num_day"] = "\\textbf{" + \
+        str(dim_2_ap_noel_date.day) + "} & " + dim_2_ap_noel["symbols"] + " \\textbf{\\textsc{Dominica}}"
+    dim_2_ap_noel["header"] = " \\textbf{\\textsc{II post Nativitatem}} - de ea - \\textit{Alb}."
+    dim_2_ap_noel["symbols"] = ""
     messe_basse = "\\item \\textit{In ML: Dominica infra octavam Nativitatis vel Missa Sanctissimi Nominis Iesu}." if dim_2_ap_noel_date.day == 3 else "\\item \\textit{In ML: Dominica infra octavam Nativitatis.}"
     lectures_mc = "Si \\textbf{24}, 1-2.8-12 / Ep \\textbf{1}, 3-6.15-18 / Io \\textbf{1}, 1-18"
     lect_propres = " Lectiones propriæ: " + lectures_mc + \
@@ -387,13 +392,13 @@ def dict_tempo_create(current_year, even_year, year_letter):
         (bapteme_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
     hebdo_psalt_vigiles = "; psalmi anni {}".format(
         hebdo_psalterii_inv[even_year])
-    bapteme["num_day"] = "\\textbf{" + str(bapteme_date.day) + "} &"
+    bapteme["num_day"] = "\\textbf{" + str(bapteme_date.day) + "} & \\textbf{\\textsc{Dominica}}"
     bapteme["symbols"] = "".join(
         f_symbols(bapteme_date)) + (" " if f_symbols(bapteme_date) != "" else "")
     num_dim_post_nat = "II" if noel_date.weekday(
     ) == 6 or noel_date.weekday() == 0 else "III"
-    bapteme["header"] = " \\textbf{\\textsc{Dominica " + num_dim_post_nat + \
-        " post Nativitatem - Dominica in Baptismate Domini}} (I post Epiphaniam) - \\textbf{festum} - \\textit{Alb}."
+    bapteme["alt_header"] = num_dim_post_nat + "post Nativitatem - I post Epiphaniam"
+    bapteme["header"] = " \\textbf{\\textsc{ in Baptismate Domini}}- \\textbf{festum} () - \\textit{Alb}."
     lect_bapteme = {"A": "Is \\textbf{42}, 1-4.6-7 / Act \\textbf{10}, 34-38 / Mt \\textbf{3}, 13-17", "B": "Is \\textbf{55}, 1-11 / 1 Io \\textbf{5}, 1-9 / Mc \\textbf{1}, 7-11",
                     "C": "Is \\textbf{40}, 1-5.9-11 / Tit \\textbf{2}, 11-14; \\textbf{3}, 4-7 / Lc \\textbf{3}, 15-16.21-22"}
     bapteme["body"] = "\n\\item In Officio: omnia dicuntur sicut in festo Epiphaniæ, præter antiphonas in folio separato AM 305* ; oratio AM 304.\n\\item Ad Vigilias: olim die 13 ianuarii" + hebdo_psalt_vigiles + "; in I Nocturno lectiones e dominica I post Epiphaniam cum responsorio \\textit{Hodie in Iordane} (post lectionem I).\n\\item \\textit{In ML: Missa in Commemoratione Baptismatis Domini Nostri Iesu Christi.}\n\\item In MC: lectiones propriæ: " + lect_bapteme[
@@ -479,11 +484,12 @@ def dict_tempo_create(current_year, even_year, year_letter):
         new_dim_careme["I_vesp"] = "\\item I Vesperæ dominicæ sequentis."
         new_dim_careme["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
             (new_dim_careme_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-        new_dim_careme["num_day"] = "\\textbf{" + \
-            str(new_dim_careme_date.day) + "} &"
         new_dim_careme["symbols"] = "".join(f_symbols(new_dim_careme_date))
+        new_dim_careme["num_day"] = "\\textbf{" + \
+            str(new_dim_careme_date.day) + "} & " + new_dim_careme["symbols"] + " \\textbf{\\textsc{Dominica}}"
+        new_dim_careme["symbols"] = ""
         dim_laetare = ", Lætare}" if i == 3 else "}"
-        new_dim_careme["header"] = " \\textbf{\\textsc{Dominica " + f_roman_numbers(
+        new_dim_careme["header"] = " \\textbf{\\textsc{" + f_roman_numbers(
             i + 1) + " in Quadragesima}" + dim_laetare + " - de ea - \\textit{Viol.}"
         lectures_annee_A = " tres lectiones Anno A;" if (
             i == 2 or i == 3) and year_letter != "A" else ""
@@ -527,9 +533,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
     passion["generalities"] = "\n\\medskip\n\\ApplyGenerList{\n\\item A I Vesperis dominicæ V in Quadragesima sumitur ordinarium Officii temporis Passionis (AM 382).\n\\item ß \\textit{Gloria Patri} dicitur de more (pro cantu huius versiculi in responsorio brevi, vide in AM 1044 vel 336).\n\\item Ad Vigilias: invitatorium \\textit{Hodie si vocem}; quarta stropha psalmi 94 incipit a verbis \\textit{Sicut in exacerbatione}.\n\\item Cruces et imagines per ecclesiam cooperiuntur.\n\\item In ML de tempore: non dicitur psalmus \\textit{Iudica} ante confessionem, neque \\textit{Gloria} ad introitum et post psalmum \\textit{Lavabo}.}"
     passion["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
         (passion_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-    passion["num_day"] = "\\textbf{" + str(passion_date.day) + "} &"
     passion["symbols"] = "".join(f_symbols(passion_date))
-    passion["header"] = " \\textbf{\\textsc{Dominica V in Quadragesima}} (I Passionis) - de ea - \\textit{Viol.}"
+    passion["num_day"] = "\\textbf{" + str(passion_date.day) + "} & " + passion["symbols"] + " \\textbf{\\textsc{Dominica}}"
+    passion["header"] = " \\textbf{\\textsc{V in Quadragesima}} (I Passionis) - de ea - \\textit{Viol.}"
+    passion["symbols"] = ""
     passion["body"] = "\\item In MC:" + \
         (" tres lectiones Anno A ;" if year_letter !=
          "A" else "") + " præfatio propria."
@@ -573,9 +580,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
     rameaux["generalities"] = "\n\\newpage\n\\ApplyParBox{1cm}{\\ApplyGenerTitleHuge{Hebdomada Sancta}}"
     rameaux["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
         (rameaux_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-    rameaux["num_day"] = "\\textbf{" + str(rameaux_date.day) + "} &"
     rameaux["symbols"] = "".join(f_symbols(rameaux_date))
-    rameaux["header"] = " \\textbf{\\textsc{Dominica in Palmis de Passione Domini}} - de ea - \\textit{Rub.}"
+    rameaux["num_day"] = "\\textbf{" + str(rameaux_date.day) + "} & " + rameaux["symbols"] + " \\textbf{\\textsc{Dominica}}"
+    rameaux["header"] = " \\textbf{\\textsc{in Palmis de Passione Domini}} - de ea - \\textit{Rub.}"
+    rameaux["symbols"] = ""
     rameaux[
         "body"] = "\\item Ad Vigilias: in II Nocturno sumuntur lectiones 7 et 8 cum ¶~8. Cantato ¶, omissis canticis, hebdomadarius immediate cantat orationem diei post \\textit{Oremus}.\\item Ad Laudes: psalmi 148 et 149 omittuntur. \\item \\textit{In ML (Viol.): ante lectionem historiæ Passionis omittuntur \\emph{Dominus vobiscum} et cætera (uti indicatur in Missali); post lectionem non respondetur \\emph{Laus tibi Christe} et celebrans non osculatur librum (quod servatur etiam feria III et IV); legitur in fine (loco Evangelii sancti Ioannis) Evangelium ut in benedictione ramorum.}\n\\item In MC: ante Missam, benedictio et processio palmarum; omittitur antiphona ad introitum; circa finem historiæ Passionis, genuflectitur et pausatur aliquantulum; præfatio propria."
     rameaux["preface_feries"] = "\n\\item In feriis: præfatio II de Passione Domini, nisi aliter notetur."
@@ -709,11 +717,12 @@ def dict_tempo_create(current_year, even_year, year_letter):
         dim_ap_paques["anniv"] = "Indulgentia plenaria conceditur, suetis sub condicionibus (nempe Sacramentali Confessione, Eucharistica Communione et Oratione ad mentem Summi Pontificis) christifideli, qui, die Dominica II Paschæ seu de Divina Misericordia, in quacumque ecclesia vel oratorio, animo quidem omnino elongato ab affectu erga quodcumque peccatum, etiam veniale, pium exercitium in honorem Divinæ Misericordiæ participaverit, vel saltem coram SS.mo Eucharistiæ Sacramento, publice exposito vel etiam in tabernaculo adservato, Orationem Dominicam ac Symbolum Fidei recitaverit, addita pia aliqua invocatione ad Misericordem Iesum (e.g. “Misericors Iesu in Te confido”)." if i == 0 else ""
         dim_ap_paques["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
             (dim_ap_paques_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-        dim_ap_paques["num_day"] = "\\textbf{" + \
-            str(dim_ap_paques_date.day) + "} &"
         dim_ap_paques["symbols"] = "".join(f_symbols(dim_ap_paques_date))
-        dim_ap_paques["header"] = (" \\textbf{\\textsc{Dominica " + f_roman_numbers(i + 2) + " Paschæ}} (seu Dominica " + f_roman_numbers(
-            i + 1) + " post Pascha) - de ea - \\textit{Alb.}") if i != 0 else " \\textbf{\\textsc{Dominica II Paschæ}} seu \\textbf{\\textsc{De Divina Misericordia}} (Dominica in Albis) - de ea - \\textit{Alb.}"
+        dim_ap_paques["num_day"] = "\\textbf{" + \
+            str(dim_ap_paques_date.day) + "} & " + dim_ap_paques["symbols"] + " \\textbf{\\textsc{Dominica}}"
+        dim_ap_paques["header"] = (" \\textbf{\\textsc{" + f_roman_numbers(i + 2) + " Paschæ}} (seu Dominica " + f_roman_numbers(
+            i + 1) + " post Pascha) - de ea - \\textit{Alb.}") if i != 0 else " \\textbf{\\textsc{II Paschæ}} seu \\textbf{\\textsc{De Divina Misericordia}} (Dominica in Albis) - de ea - \\textit{Alb.}"
+        dim_ap_paques["symbols"] = ""
         dim_ap_paques["body"] = ""
         if i == 0:
             dim_ap_paques[
@@ -811,9 +820,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
     dim_7_paques["I_vesp"] = "\n\\item I Vesperæ dominicæ sequentis."
     dim_7_paques["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
         (dim_7_paques_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-    dim_7_paques["num_day"] = "\\textbf{" + str(dim_7_paques_date.day) + "} &"
     dim_7_paques["symbols"] = "".join(f_symbols(dim_7_paques_date))
-    dim_7_paques["header"] = " \\textbf{\\textsc{Dominica VII Paschæ}} (seu Dominica post Ascensionem vel infra octavam Ascensionis) - de ea - \\textit{Alb}."
+    dim_7_paques["num_day"] = "\\textbf{" + str(dim_7_paques_date.day) + "} & " + dim_7_paques["symbols"] + " \\textbf{\\textsc{Dominica}}"
+    dim_7_paques["header"] = " \\textbf{\\textsc{VII Paschæ}} (seu Dominica post Ascensionem vel infra octavam Ascensionis) - de ea - \\textit{Alb}."
+    dim_7_paques["symbols"] = ""
     dim_7_paques["body"] = "\n\\item Ad Vigilias: invitatorium de Ascensione.\n\\item Ad Laudes et Horas minores: antiphonæ et psalmi de dominica in psalterio tempore paschali.\n\\item In MC: præfatio II de Ascensione.\n\\item Vesperæ dominicæ: antiphonæ et psalmi de dominica in psalterio tempore paschali; ¶ et hymnus in AM 518."
     dim_7_paques["preface_feries"] = "\n\\item In feriis: præfatio II de Ascensione, nisi aliter notetur."
     current_lectiones = lectiones["hebdo_7_paques"]
@@ -957,11 +967,12 @@ def dict_tempo_create(current_year, even_year, year_letter):
                  2 else "dominicæ") + " sequentis" + forme_extra_I_vesp + "."
             new_dim["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
                 (new_dim_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-            new_dim["num_day"] = "\\textbf{" + str(new_dim_date.day) + "} &"
-            new_dim["header"] = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-                " per annum}} (" + forme_extra + ")" + \
-                " - de ea - \\textit{Vir.}"
             new_dim["symbols"] = "".join(f_symbols(new_dim_date))
+            new_dim["num_day"] = "\\textbf{" + str(new_dim_date.day) + "} & " + new_dim["symbols"] + " \\textbf{\\textsc{Dominica}}"
+            new_dim["header"] = " \\textbf{\\textsc{" + num_dim_per_annum + \
+                " per annum}} () - de ea - \\textit{Vir.}"
+            new_dim["alt_header"] = num_dim_per_annum + " per annum - " + forme_extra
+            new_dim["symbols"] = ""
             new_dim["body"] = comment_septua + "\n\\item In MC: præfatio " + num_pref_dim + " de dominicis." + \
                 ("\n\\item Ad benedictionem Sanctissimi Sacramenti, post canticum expositionis, cantatur \\textit{Ubi Caritas} in Besnier 275 (hebdomada pro christianorum unitate)." if new_dim_date.day <
                  25 and new_dim_date.day >= 18 and new_dim_date.month == 1 else "")
@@ -1035,12 +1046,12 @@ def dict_tempo_create(current_year, even_year, year_letter):
                     "I_vesp"] = "\n\\item I Vesperæ sollemnitatis sequentis}\n\\ApplyHebdoPsalt{\\textbf{- Pro breviario 1962: tomus alter -}"
                 trinite["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
                     (new_dim_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
+                trinite["symbols"] = "".join(f_symbols(new_dim_date))
                 trinite["num_day"] = "\\textbf{" + \
-                    str(new_dim_date.day) + "} &"
-                trinite["symbols"] = "".join(
-                    f_symbols(new_dim_date)) + (" " if f_symbols(new_dim_date) != "" else "")
-                trinite["header"] = "\\textbf{\\textsc{Dominica " + num_dim_per_annum + " per annum}" + \
-                    " - \\MakeUppercase{Sanctissimæ Trinitatis}} (I post Pentecosten) " + \
+                    str(new_dim_date.day) + "} & " + trinite["symbols"] + " \\textbf{\\MakeUppercase{Dominica}}"
+                trinite["symbols"] = "".join(f_symbols(new_dim_date))
+                trinite["alt_header"] = num_dim_per_annum + " per annum - I post Pentecosten"
+                trinite["header"] = " \\textbf{ \\MakeUppercase{Sanctissimæ Trinitatis}} () " + \
                     " - \\textbf{sollemnitas minor} - \\textit{Alb}."
                 trinite["body"] = "\n\\item In MC: MR 485; præfatio propria."
                 trinite["preface_feries"] = "\n\\item In feriis: præfatio communis " + \
@@ -1067,10 +1078,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
                 christ_roi["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
                     (new_dim_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
                 christ_roi["num_day"] = "\\textbf{" + \
-                    str(christ_roi_date.day) + "} &"
+                    str(christ_roi_date.day) + "} & \\textbf{\\MakeUppercase{Dominica}}"
                 num_summer = f_num_summer(christ_roi_date)[0] if f_num_summer(
                     christ_roi_date)[0] == "III" else ("V" if even_year else "IV")
-                christ_roi["header"] = "\\textbf{\\textsc{Dominica XXXIV per annum} - \\MakeUppercase{Domini nostri Iesu Christi Universorum Regis}} (XXIV post Pentecosten - " + \
+                christ_roi["header"] = " \\textbf{ \\MakeUppercase{Domini nostri Iesu Christi Universorum Regis}} (XXXIV per annum - XXIV post Pentecosten - " + \
                     num_summer + \
                     " novembris) - \\textbf{sollemnitas minor} - \\textit{Alb}."
                 christ_roi["body"] = "\n\\item Ad Vigilias: in II Nocturno: lectiones 5 et 6 cum ¶ lectionis 8; in III Nocturno: lectiones 11 et 12.\n\\item In MC: præfatio propria."
@@ -1115,12 +1126,14 @@ def dict_tempo_create(current_year, even_year, year_letter):
                     "}\n\\medskip\n\\ApplyPrefaceFeries{\n\\item A dominica I octobris usque ad Adventum: dicitur hymnus hiemalis ad Vigilias, Laudes et Vesperas." if num_summer == " - I octobris" else "")
                 new_dim["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
                     (new_dim_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
-                new_dim["num_day"] = "\\textbf{" + \
-                    str(new_dim_date.day) + "} &"
-                new_dim["header"] = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-                    " per annum}} (" + num_dim_ap_pentec + \
-                    num_summer + ")" + " - de ea - \\textit{Vir.}"
                 new_dim["symbols"] = "".join(f_symbols(new_dim_date))
+                new_dim["num_day"] = "\\textbf{" + \
+                    str(new_dim_date.day) + "} & " + new_dim["symbols"] + " \\textbf{\\textsc{Dominica}}"
+                new_dim["alt_header"] = num_dim_per_annum + " per annum - " + num_dim_ap_pentec + \
+                    num_summer
+                new_dim["header"] = " \\textbf{\\textsc{" + num_dim_per_annum + \
+                    " per annum}} ()" + " - de ea - \\textit{Vir.}"
+                new_dim["symbols"] = ""
                 if i == 2:
                     body_special = "\n\\item Officium totum dicitur ut in dominicis per annum, præter antiphonas ad Benedictus et Magnificat in AM 557-558."
                 elif i == 3:

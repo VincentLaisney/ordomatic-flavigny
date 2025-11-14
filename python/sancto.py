@@ -425,19 +425,19 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     # Si dimanche, il faut calculer quel dimanche c'est dans la forme extraordinaire (dans la forme ordinaire, c'est forcément le IVe dim. Per annum).
     if presentation_date.weekday() == 6:
         presentation["I_vesp"] = "\n\\item I Vesperæ festi sequentis."
-        pres_dim = " \\textbf{\\textsc{Dominica IV per annum}}"
-        if presentation_date.day == paques - datetime.timedelta(days=63):
-            pres_dim += " (Septuagesima)"
-        elif presentation_date.day == paques - datetime.timedelta(days=56):
-            pres_dim += " (Sexagesima)"
-        elif presentation_date.day == paques - datetime.timedelta(days=49):
-            pres_dim += " (Quinquagesima)"
-        else:
-            pres_dim += " (IV post Epiphaniam)"
-    else:
-        pres_dim = ""
+    #     pres_dim = " \\textbf{\\textsc{Dominica IV per annum}}"
+    #     if presentation_date.day == paques - datetime.timedelta(days=63):
+    #         pres_dim += " (Septuagesima)"
+    #     elif presentation_date.day == paques - datetime.timedelta(days=56):
+    #         pres_dim += " (Sexagesima)"
+    #     elif presentation_date.day == paques - datetime.timedelta(days=49):
+    #         pres_dim += " (Quinquagesima)"
+    #     else:
+    #         pres_dim += " (IV post Epiphaniam)"
+    # else:
+    pres_dim = ""
     presentation["header"] = pres_dim + \
-        " - \\textbf{\\textsc{In Præsentatione Domini}} (vel Purificationis Beatæ Mariæ Virginis) - \\textbf{festum} - \\textit{Alb.}"
+        " - \\textbf{\\textsc{In Præsentatione Domini}} (vel Purificationis Beatæ Mariæ Virginis - (()- \\textbf{festum} - \\textit{Alb.}"
     if presentation_date.weekday() == 6:
         lectures_mc = " Mal \\textbf{3}, 1-4 / Hebr \\textbf{2}, 14-18"
     elif even_year:
@@ -1331,23 +1331,23 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_jean_baptiste = dict_sancto[saint_jean_baptiste_date] = {}
     saint_jean_baptiste["force"] = 110
     saint_jean_baptiste["I_vesp"] = "\\item I Vesperæ sollemnitatis sequentis."
-    if saint_jean_baptiste_date.weekday() == 6:
-        num_dim_ap_pentec = (saint_jean_baptiste_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        if num_dim_ap_pentec == 2:
-            text_ap_pentec = "II post Pentecosten vel infra octavam Ss. Corporis Christi"
-        elif num_dim_ap_pentec == 3:
-            text_ap_pentec = "III post Pentecosten vel infra octavam Ss. Cordis Iesu"
-        else:
-            text_ap_pentec = f_roman_numbers(
-                num_dim_ap_pentec) + " post Pentecosten"
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    # if saint_jean_baptiste_date.weekday() == 6:
+    #     num_dim_ap_pentec = (saint_jean_baptiste_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     if num_dim_ap_pentec == 2:
+    #         text_ap_pentec = "II post Pentecosten vel infra octavam Ss. Corporis Christi"
+    #     elif num_dim_ap_pentec == 3:
+    #         text_ap_pentec = "III post Pentecosten vel infra octavam Ss. Cordis Iesu"
+    #     else:
+    #         text_ap_pentec = f_roman_numbers(
+    #             num_dim_ap_pentec) + " post Pentecosten"
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     saint_jean_baptiste["header"] = text_dim + \
-        " - þ \\textbf{\\MakeUppercase{In nativitate S. Ioannis Baptistæ}} - \\textbf{sollemnitas minor} - \\textit{Alb.}"
+        " - þ \\textbf{\\MakeUppercase{In nativitate S. Ioannis Baptistæ}} () - \\textbf{sollemnitas minor} - \\textit{Alb.}"
     hymne_laudes = "\n\\item Ad Laudes: hymnus \\textit{Antra deserti} (AM 928a)." if saint_jean_baptiste_date.day == 25 or paques == datetime.date(
         current_year, 4, 24) or paques == datetime.date(current_year, 4, 16) else ""
     saint_jean_baptiste["body"] = hymne_laudes + \
@@ -1389,23 +1389,23 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saints_pierre_et_paul["force"] = 110
     saints_pierre_et_paul[
         "I_vesp"] = "\\item I Vesperæ sollemnitatis sequentis; ad Magnificat: ø \\textit{Gloriosi} (AM 958)."
-    if saints_pierre_et_paul_date.weekday() == 6:
-        num_dim_ap_pentec = (saints_pierre_et_paul_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        if num_dim_ap_pentec == 2:
-            text_ap_pentec = "II post Pentecosten vel infra octavam Ss. Corporis Christi"
-        elif num_dim_ap_pentec == 3:
-            text_ap_pentec = "III post Pentecosten vel infra octavam Ss. Cordis Iesu"
-        else:
-            text_ap_pentec = f_roman_numbers(
-                num_dim_ap_pentec) + " post Pentecosten"
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    # if saints_pierre_et_paul_date.weekday() == 6:
+    #     num_dim_ap_pentec = (saints_pierre_et_paul_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     if num_dim_ap_pentec == 2:
+    #         text_ap_pentec = "II post Pentecosten vel infra octavam Ss. Corporis Christi"
+    #     elif num_dim_ap_pentec == 3:
+    #         text_ap_pentec = "III post Pentecosten vel infra octavam Ss. Cordis Iesu"
+    #     else:
+    #         text_ap_pentec = f_roman_numbers(
+    #             num_dim_ap_pentec) + " post Pentecosten"
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     saints_pierre_et_paul["header"] = text_dim + \
-        " - þ \\textbf{\\MakeUppercase{Ss. Petri et Pauli, Apostolorum}} - \\textbf{sollemnitas minor} - \\textit{Rub.}"
+        " - þ \\textbf{\\MakeUppercase{Ss. Petri et Pauli, Apostolorum}} () - \\textbf{sollemnitas minor} - \\textit{Rub.}"
     saints_pierre_et_paul["body"] = "\n\\item Ad Benedictus: ø \\textit{Petrus} (AM 959).\n\\item In MC: lectiones propriæ: Act \\textbf{12}, 1-11 / 2 Tim \\textbf{4}, 6-8.17-18 / Mt \\textbf{16}, 13-19; præfatio propria; Missa concluditur benedictione sollemni."
     saints_pierre_et_paul[
         "II_vesp"] = "\n\\item Vesperæ sollemnitatis ut in AM 939, præter antiphonas et capitulum de commemoratione S. Pauli Apostoli (AM 941), cum psalmis ut in II Vesperis de Communi Apostolorum."
@@ -1451,18 +1451,18 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_benoit = dict_sancto[saint_benoit_date] = {}
     saint_benoit["force"] = 110
     saint_benoit["I_vesp"] = "\n\\item I Vesperæ sollemnitatis sequentis."
-    if saint_benoit_date.weekday() == 6:
-        num_dim_ap_pentec = (saint_benoit_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten"
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    # if saint_benoit_date.weekday() == 6:
+    #     num_dim_ap_pentec = (saint_benoit_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten"
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     saint_benoit["header"] = text_dim + \
-        " - ¬ \\textbf{\\MakeUppercase{S. P. N. Benedicti, Abbatis,}} \\textsc{Europæ patroni} - \\textbf{sollemnitas maior} - \\textit{Alb.}"
+        " - ¬ \\textbf{\\MakeUppercase{S. P. N. Benedicti, Abbatis,}} \\textsc{Europæ patroni} () - \\textbf{sollemnitas maior} - \\textit{Alb.}"
     saint_benoit[
         "body"] = "\n\\item Ad Vigilias: in III Nocturno: lectio 9.\n\\item \\textit{In ML: Missa in supplemento OSB; præfatio propria.}\n\\item In MC: omnia in MP; lectiones propriæ: Pr \\textbf{2}, 1-9 / Ep \\textbf{4}, 1-6 / Mt \\textbf{19}, 27-29; sequentia; præfatio propria; \\textit{Pater} in tono C (GR 814)."
     saint_benoit["II_vesp"] = "\n\\item Vesperæ sollemnitatis; benedictio Sanctissimi Sacramenti."
@@ -1622,22 +1622,22 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     transfiguration = dict_sancto[transfiguration_date] = {}
     if transfiguration_date.weekday() == 6:
         transfiguration["I_vesp"] = "\n\\item I Vesperæ festi sequentis."
-        transfiguration["force"] = 90
-        num_dim_ap_pentec = (transfiguration_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        num_summer = " - " + \
-            f_num_summer(transfiguration_date)[
-                0] + f_num_summer(transfiguration_date)[1]
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten" + num_summer
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        transfiguration["force"] = 90
-        text_dim = ""
+    #     transfiguration["force"] = 90
+    #     num_dim_ap_pentec = (transfiguration_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     num_summer = " - " + \
+    #         f_num_summer(transfiguration_date)[
+    #             0] + f_num_summer(transfiguration_date)[1]
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten" + num_summer
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    transfiguration["force"] = 90
+    text_dim = ""
     transfiguration["header"] = text_dim + \
-        " - \\textbf{\\textsc{in Transfiguratione Domini}} - \\textbf{festum} - \\textit{Alb.}"
+        " - \\textbf{\\textsc{in Transfiguratione Domini}} () - \\textbf{festum} - \\textit{Alb.}"
     evang_mc = {"A": "Mt \\textbf{17}, 1-9",
                 "B": "Mc \\textbf{9}, 2-10", "C": "Lc \\textbf{9}, 28b-36"}
     if transfiguration_date.weekday() == 6:
@@ -1713,20 +1713,20 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     assomption = dict_sancto[assomption_date] = {}
     assomption["force"] = 110
     assomption["I_vesp"] = "\\item I Vesperæ sollemnitatis sequentis."
-    if assomption_date.weekday() == 6:
-        num_dim_ap_pentec = (assomption_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        num_summer = " - " + \
-            f_num_summer(assomption_date)[0] + f_num_summer(assomption_date)[1]
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten" + num_summer
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    # if assomption_date.weekday() == 6:
+    #     num_dim_ap_pentec = (assomption_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     num_summer = " - " + \
+    #         f_num_summer(assomption_date)[0] + f_num_summer(assomption_date)[1]
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten" + num_summer
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     assomption["header"] = text_dim + \
-        " - ¬ \\textbf{\\MakeUppercase{In assumptione Beatæ Mariæ Virginis}}, \\textsc{patronæ principalis Galliæ} - \\textbf{sollemnitas maior} - \\textit{Alb.}"
+        " - ¬ \\textbf{\\MakeUppercase{In assumptione Beatæ Mariæ Virginis}}, \\textsc{patronæ principalis Galliæ} () - \\textbf{sollemnitas maior} - \\textit{Alb.}"
     assomption[
         "body"] = "\n\\item Ad Vigilias: Officium schema I. In I Nocturno: lectiones 1 et 2 cum ¶ lectionis 4; in II Nocturno: lectiones 5 et 6 cum ¶ lectionis 8; in III Nocturno: lectiones 9, 10, 11 et 12.\n\\item In MC: lectiones propriæ: Apoc \\textbf{11}, 19a; \\textbf{12}, 1-6a.10ab / 1 Co \\textbf{15}, 20-27a / Lc \\textbf{1}, 39-56; præfatio de Assumptione; \\textit{Pater} in tono C (GR 814); Missa concluditur benedictione sollemni."
     assomption[
@@ -1825,21 +1825,21 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     sainte_reine[
         "I_vesp"] = "\\item I Vesperæ sollemnitatis sequentis. ¶ \\textit{Adiuvabit eam} et versiculum in AM 1178."
     # Si tombe un dimanche, on calcule quel dimanche (per annum, post Pentecosten).
-    if sainte_reine_date.weekday() == 6:
-        num_dim_ap_pentec = (sainte_reine_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        num_summer = " - " + \
-            f_num_summer(sainte_reine_date)[
-                0] + f_num_summer(sainte_reine_date)[1]
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten" + num_summer
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    # if sainte_reine_date.weekday() == 6:
+    #     num_dim_ap_pentec = (sainte_reine_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     num_summer = " - " + \
+    #         f_num_summer(sainte_reine_date)[
+    #             0] + f_num_summer(sainte_reine_date)[1]
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten" + num_summer
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     sainte_reine["header"] = text_dim + \
-        " - þ \\textbf{\\MakeUppercase{S. Reginæ, virginis et martyris}} - \\textbf{sollemnitas minor} - \\textit{Rub.}"
+        " - þ \\textbf{\\MakeUppercase{S. Reginæ, virginis et martyris}} () - \\textbf{sollemnitas minor} - \\textit{Rub.}"
     sainte_reine[
         "body"] = "\n\\item In Officio: omnia de Communi virginum; oratio in supplemento 168.\n\\item Ad Vigilias: hymnus proprius et lectiones II Nocturni in folio supplemento; lectio I Nocturni de libro Ecclesiastici \\textbf{51}, 1-17 in breviario monastico 172*.\n\\item Ad Laudes: versiculum in AM 1178.\n\\item \\textit{In ML: dicitur \\emph{Credo}; præfatio de sanctis martyribus.}\n\\item In MC: collecta propria; Commune virginis martyris (MR 924); lectiones propriæ: Ct \\textbf{8}, 6-7 / Ep \\textbf{6}, 10-13. 18 / Mt \\textbf{25}, 1-13 ; præfatio de sanctis martyribus."
     sainte_reine["II_vesp"] = "\n\\item Vesperæ sollemnitatis. ¶ \\textit{Adiuvabit eam} et versiculum in AM 1178." if sainte_reine_date.weekday(
@@ -1882,20 +1882,20 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     # Si tombe un dimanche, on calcule quel dimanche (per annum, post Pentecosten) :
     if sainte_croix_date.weekday() == 6:
         sainte_croix["I_vesp"] = "\n\\item I Vesperæ festi sequentis."
-        num_dim_ap_pentec = (sainte_croix_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        num_summer = " - " + \
-            f_num_summer(sainte_croix_date)[
-                0] + f_num_summer(sainte_croix_date)[1]
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten" + num_summer
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    #     num_dim_ap_pentec = (sainte_croix_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     num_summer = " - " + \
+    #         f_num_summer(sainte_croix_date)[
+    #             0] + f_num_summer(sainte_croix_date)[1]
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten" + num_summer
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     sainte_croix["header"] = text_dim + \
-        " - \\textbf{\\textsc{In Exaltatione Sanctæ Crucis}} - \\textbf{festum} - \\textit{Rub.}"
+        " - \\textbf{\\textsc{In Exaltatione Sanctæ Crucis}} () - \\textbf{festum} - \\textit{Rub.}"
     vigiles_lectiones = "\n\\item Ad Vigilias sumuntur lectiones III Nocturni." if even_year else ""
     lectures_mc = "Nb \\textbf{21}, 4b-9 / " if sainte_croix_date.weekday() == 6 else ""
     vepres = "\\item Ad Vesperas: omnia ut in I Vesperis præter ad Magnificat: ø \\textit{O Crux benedicta} (AM 1046)." if even_year or sainte_croix_date.weekday(
@@ -2206,20 +2206,20 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     toussaint["I_vesp"] = "\\item I Vesperæ sollemnitatis sequentis (hymnus in folio separato)."
     toussaint[
         "generalities"] = "\\medskip\n\\textit{Plenaria indulgentia, animabus in Purgatorio detentis tantummodo applicabilis, conceditur christifideli qui}\\par \\textit{1° singulis diebus, a primo usque ad octavum novembris, cœmeterium devote visitaverit et, vel mente tantum, pro defunctis exoraverit;}\\par \\textit{2° die Commemorationis omnium fidelium defunctorum (vel, de consensu Ordinarii, die Dominico antecedenti aut subsequenti aut die sollemnitatis Omnium Sanctorum) ecclesiam aut oratorium pie visitaverit ibique recitaverit \\emph{Pater} et \\emph{Credo}.}\\begin{flushright}\\textit{(Enchiridion Indulgentiarum, concessio n. 29: Pro fidelibus defunctis).}\\end{flushright}"
-    if toussaint_date.weekday() == 6:
-        num_dim_ap_pentec = (toussaint_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        num_summer = " - " + \
-            f_num_summer(toussaint_date)[0] + f_num_summer(toussaint_date)[1]
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten" + num_summer
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    # if toussaint_date.weekday() == 6:
+    #     num_dim_ap_pentec = (toussaint_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     num_summer = " - " + \
+    #         f_num_summer(toussaint_date)[0] + f_num_summer(toussaint_date)[1]
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten" + num_summer
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     toussaint["header"] = text_dim + \
-        " - ¬ \\textbf{\\MakeUppercase{Omnium Sanctorum}} - \\textbf{sollemnitas maior} - \\textit{Alb.}"
+        " - ¬ \\textbf{\\MakeUppercase{Omnium Sanctorum}} () - \\textbf{sollemnitas maior} - \\textit{Alb.}"
     toussaint[
         "body"] = "\n\\item Ad Laudes et Vesperas: hymnus in folio separato.\n\\item \\textit{In ML: præfatio de sanctis.}\n\\item In MC: lectiones propriæ: Apoc \\textbf{7}, 2-4.9-14 / 1 Io \\textbf{3}, 1-3 / Mt \\textbf{5}, 1-12a; præfatio propria; \\textit{Pater} in tono C (GR 814); Missa concluditur benedictione sollemni."
     toussaint["II_vesp"] = "\n\\item Vesperæ sollemnitatis; benedictio Sanctissimi Sacramenti."
@@ -2234,21 +2234,21 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     comm_defunts = dict_sancto[comm_defunts_date] = {}
     comm_defunts["force"] = 110
     # Si tombe un dimanche, on calcule quel dimanche (per annum, post Pentecosten).
-    if comm_defunts_date.weekday() == 6:
-        num_dim_ap_pentec = (comm_defunts_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        num_summer = " - " + \
-            f_num_summer(comm_defunts_date)[
-                0] + f_num_summer(comm_defunts_date)[1]
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten" + num_summer
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    # if comm_defunts_date.weekday() == 6:
+    #     num_dim_ap_pentec = (comm_defunts_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     num_summer = " - " + \
+    #         f_num_summer(comm_defunts_date)[
+    #             0] + f_num_summer(comm_defunts_date)[1]
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten" + num_summer
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     comm_defunts["header"] = text_dim + \
-        " - \\textbf{\\textsc{In Commemoratione omnium fidelium defunctorum}} - \\textit{Nigr.}"
+        " - \\textbf{\\textsc{In Commemoratione omnium fidelium defunctorum}} () - \\textit{Nigr.}"
     if comm_defunts_date.weekday() == 6:
         rajout_dimanche = "\n\\item Officium fit de dominica, officio defunctorum omisso. Missæ omnes sunt de Commemoratione omnium fidelium defunctorum.\n\\item Ad Vigilias: hymnus \\textit{Te Deum} omittitur.\n\\item Ad Laudes: psalmi 148 et 149 omittuntur."
         rajout_dim_ml = "\n\\item In ML: \\textit{Credo}."
@@ -2306,20 +2306,20 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     # Si tombe un dimanche, on calcule quel dimanche (per annum, post Pentecosten).
     if dedicace_latran_date.weekday() == 6:
         dedicace_latran["I_vesp"] = "\n\\item I Vesperæ festi sequentis."
-        num_dim_ap_pentec = (dedicace_latran_date - pentecote).days // 7
-        num_dim_per_annum = f_roman_numbers(
-            num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
-        num_summer = " - " + \
-            f_num_summer(dedicace_latran_date)[
-                0] + f_num_summer(dedicace_latran_date)[1]
-        text_ap_pentec = f_roman_numbers(
-            num_dim_ap_pentec) + " post Pentecosten" + num_summer
-        text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
-            " per annum}}" + " (" + text_ap_pentec + ")"
-    else:
-        text_dim = ""
+    #     num_dim_ap_pentec = (dedicace_latran_date - pentecote).days // 7
+    #     num_dim_per_annum = f_roman_numbers(
+    #         num_dim_ap_pentec + 35 - nb_dim_ap_pentec)
+    #     num_summer = " - " + \
+    #         f_num_summer(dedicace_latran_date)[
+    #             0] + f_num_summer(dedicace_latran_date)[1]
+    #     text_ap_pentec = f_roman_numbers(
+    #         num_dim_ap_pentec) + " post Pentecosten" + num_summer
+    #     text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
+    #         " per annum}}" + " (" + text_ap_pentec + ")"
+    # else:
+    text_dim = ""
     dedicace_latran["header"] = text_dim + \
-        " - \\textbf{\\textsc{In Dedicatione Basilicæ Lateranensis}} - \\textbf{festum} - \\textit{Alb.}"
+        " - \\textbf{\\textsc{In Dedicatione Basilicæ Lateranensis}} () - \\textbf{festum} - \\textit{Alb.}"
     # Lectures MC:
     if dedicace_latran_date.weekday() == 6:
         lectures_mc = "Ez \\textbf{47}, 1-2.8-9.12 / 1 Co \\textbf{3}, 9b-11.16-17"
