@@ -295,8 +295,9 @@ def dict_tempo_create(current_year, even_year, year_letter):
     ) == 6 else ""
     ste_famille["hebdo_psalt"] = ("- Hebdomada " + hebdo_psalterii[((ste_famille_date - datetime.date(
         2011, 11, 27)).days // 7) % 2] + " psalterii -") if ste_famille_date.weekday() == 6 else ""
-    ste_famille["header"] = " \\textbf{\\textsc{" + ("Dominica I post nativitatem - " if noel_weekday !=
-                                                     6 else "\\textnormal{Feria VI - }") + "Sanctæ Familiæ Iesu, Mariæ et Ioseph}} - \\textbf{festum} - \\textit{Alb}."
+    ste_famille["header"] = " \\textbf{\\textsc{" + ("Dominica " if noel_weekday !=
+        6 else "\\textnormal{Feria VI - }") + "Sanctæ Familiæ Iesu, Mariæ et Ioseph}} " + \
+        ("(I post nativitatem)" if noel_weekday != 6 else "") + " - \\textbf{festum} - \\textit{Alb}."
     # Hebdo_psalt_vigiles:
     hebdo_psalt_vigiles = "\n\\item Ad Vigilias: psalmi anni {}.".format(
         hebdo_psalterii_inv[even_year])
@@ -1047,10 +1048,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
                     (new_dim_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
                 trinite["symbols"] = "".join(f_symbols(new_dim_date))
                 trinite["num_day"] = "\\textbf{" + \
-                    str(new_dim_date.day) + "} & " + trinite["symbols"] + " \\textbf{\\textsc{Dominica}}"
+                    str(new_dim_date.day) + "} & " + trinite["symbols"] + " \\textbf{\\MakeUppercase{Dominica}}"
                 trinite["symbols"] = "".join(f_symbols(new_dim_date))
                 trinite["alt_header"] = num_dim_per_annum + " per annum - I post Pentecosten"
-                trinite["header"] = " \\textbf{ - \\MakeUppercase{Sanctissimæ Trinitatis}} () " + \
+                trinite["header"] = " \\textbf{ \\MakeUppercase{Sanctissimæ Trinitatis}} () " + \
                     " - \\textbf{sollemnitas minor} - \\textit{Alb}."
                 trinite["body"] = "\n\\item In MC: MR 485; præfatio propria."
                 trinite["preface_feries"] = "\n\\item In feriis: præfatio communis " + \
@@ -1077,10 +1078,10 @@ def dict_tempo_create(current_year, even_year, year_letter):
                 christ_roi["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[(
                     (new_dim_date - datetime.date(2011, 11, 27)).days // 7) % 2] + " psalterii -"
                 christ_roi["num_day"] = "\\textbf{" + \
-                    str(christ_roi_date.day) + "} & \\textbf{\\textsc{Dominica}}"
+                    str(christ_roi_date.day) + "} & \\textbf{\\MakeUppercase{Dominica}}"
                 num_summer = f_num_summer(christ_roi_date)[0] if f_num_summer(
                     christ_roi_date)[0] == "III" else ("V" if even_year else "IV")
-                christ_roi["header"] = " \\textbf{ - \\MakeUppercase{Domini nostri Iesu Christi Universorum Regis}} (XXXIV per annum - XXIV post Pentecosten - " + \
+                christ_roi["header"] = " \\textbf{ \\MakeUppercase{Domini nostri Iesu Christi Universorum Regis}} (XXXIV per annum - XXIV post Pentecosten - " + \
                     num_summer + \
                     " novembris) - \\textbf{sollemnitas minor} - \\textit{Alb}."
                 christ_roi["body"] = "\n\\item Ad Vigilias: in II Nocturno: lectiones 5 et 6 cum ¶ lectionis 8; in III Nocturno: lectiones 11 et 12.\n\\item In MC: præfatio propria."

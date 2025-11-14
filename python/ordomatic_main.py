@@ -239,7 +239,7 @@ for i in range(nb_days):
         dict_new_day["preface_feries"] = ""
     #Numérations alternatives pour les dimanches
     if "alt_header" in dict_new_day and "()" in dict_new_day["header"]:
-        if new_day_date in dict_sancto and i != 0:
+        if new_day_date in dict_sancto and "force" in dict_sancto[new_day_date] and i != 0:
             if dict_sancto[new_day_date]["force"] < dict_new_day["force"]:
                 dict_new_day["alt_header"] = re.sub(r'^[^\-]* - ', "", dict_new_day["alt_header"])
                 dict_new_day["header"] = dict_new_day["header"].replace("()", "(" + dict_new_day["alt_header"] +")")
