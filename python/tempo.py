@@ -398,7 +398,7 @@ def dict_tempo_create(current_year, even_year, year_letter):
     num_dim_post_nat = "II" if noel_date.weekday(
     ) == 6 or noel_date.weekday() == 0 else "III"
     bapteme["alt_header"] = num_dim_post_nat + "post Nativitatem - I post Epiphaniam"
-    bapteme["header"] = " \\textbf{\\textsc{ in Baptismate Domini}}- \\textbf{festum} () - \\textit{Alb}."
+    bapteme["header"] = " \\textbf{\\textsc{in Baptismate Domini}}- \\textbf{festum} () - \\textit{Alb}."
     lect_bapteme = {"A": "Is \\textbf{42}, 1-4.6-7 / Act \\textbf{10}, 34-38 / Mt \\textbf{3}, 13-17", "B": "Is \\textbf{55}, 1-11 / 1 Io \\textbf{5}, 1-9 / Mc \\textbf{1}, 7-11",
                     "C": "Is \\textbf{40}, 1-5.9-11 / Tit \\textbf{2}, 11-14; \\textbf{3}, 4-7 / Lc \\textbf{3}, 15-16.21-22"}
     bapteme["body"] = "\n\\item In Officio: omnia dicuntur sicut in festo Epiphaniæ, præter antiphonas in folio separato AM 305* ; oratio AM 304.\n\\item Ad Vigilias: olim die 13 ianuarii" + hebdo_psalt_vigiles + "; in I Nocturno lectiones e dominica I post Epiphaniam cum responsorio \\textit{Hodie in Iordane} (post lectionem I).\n\\item \\textit{In ML: Missa in Commemoratione Baptismatis Domini Nostri Iesu Christi.}\n\\item In MC: lectiones propriæ: " + lect_bapteme[
@@ -1051,7 +1051,7 @@ def dict_tempo_create(current_year, even_year, year_letter):
                     str(new_dim_date.day) + "} & " + trinite["symbols"] + " \\textbf{\\MakeUppercase{Dominica}}"
                 trinite["symbols"] = "".join(f_symbols(new_dim_date))
                 trinite["alt_header"] = num_dim_per_annum + " per annum - I post Pentecosten"
-                trinite["header"] = " \\textbf{ \\MakeUppercase{Sanctissimæ Trinitatis}} () " + \
+                trinite["header"] = " \\textbf{\\MakeUppercase{Sanctissimæ Trinitatis}} () " + \
                     " - \\textbf{sollemnitas minor} - \\textit{Alb}."
                 trinite["body"] = "\n\\item In MC: MR 485; præfatio propria."
                 trinite["preface_feries"] = "\n\\item In feriis: præfatio communis " + \
@@ -1081,7 +1081,7 @@ def dict_tempo_create(current_year, even_year, year_letter):
                     str(christ_roi_date.day) + "} & \\textbf{\\MakeUppercase{Dominica}}"
                 num_summer = f_num_summer(christ_roi_date)[0] if f_num_summer(
                     christ_roi_date)[0] == "III" else ("V" if even_year else "IV")
-                christ_roi["header"] = " \\textbf{ \\MakeUppercase{Domini nostri Iesu Christi Universorum Regis}} (XXXIV per annum - XXIV post Pentecosten - " + \
+                christ_roi["header"] = " \\textbf{\\MakeUppercase{D. N. I. C. Universorum Regis}} (XXXIV per annum - XXIV post Pentecosten - " + \
                     num_summer + \
                     " novembris) - \\textbf{sollemnitas minor} - \\textit{Alb}."
                 christ_roi["body"] = "\n\\item Ad Vigilias: in II Nocturno: lectiones 5 et 6 cum ¶ lectionis 8; in III Nocturno: lectiones 11 et 12.\n\\item In MC: præfatio propria."
