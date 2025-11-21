@@ -36,7 +36,7 @@ text_ordo += "\n\n\\begin{center}"
 text_ordo += "\n\\par\\parbox{7.5cm}{\\vspace{1cm}}\\par"
 text_ordo += "\n\\makebox[7.5cm][s]{\\fontsize{68}{0}\\selectfont\\FontFlyLeaf{\\MakeUppercase{O R D O}}\\par}"
 text_ordo += "\n\\vspace{1cm}\\par"
-text_ordo += "\n\\makebox[7.5cm][s]{\\fontsize{24}{0}\\selectfont\\FontFlyLeaf{\\MakeUppercase{missæ celebrandæ}}\\par}"
+text_ordo += "\n\\makebox[7.5cm][s]{\\fontsize{24}{0}\\selectfont\\FontFlyLeaf{\\MakeUppercase{Missæ celebrandæ}}\\par}"
 text_ordo += "\n\\vspace{0.4cm}\\par"
 text_ordo += "\n\\makebox[7.5cm][s]{\\fontsize{24}{0}\\selectfont\\FontFlyLeaf{\\MakeUppercase{et divini officii}}\\par}"
 text_ordo += "\n\\vspace{0.4cm}\\par"
@@ -98,7 +98,7 @@ text_ordo += "\n\\ApplyParBox{0cm}{\\ApplyGenerTitleLarge{Clavis signorum}\n \\A
 text_ordo += "\n\\setlength{\\tabcolsep}{0cm}"
 text_ordo += "\n\\begin{tabular}{p{1cm} p{7.5cm}}"
 text_ordo += "\n¬ & \\small{Festum de præcepto.}\\\\"
-text_ordo += "\nþ & \\small{Festum cum tempore usque ad Nonam de præcepto, postmeridiem vero laborandum est.}\\\\"
+text_ordo += "\nþ & \\small{Festum cum tempore usque ad Nonam de præcepto, postmeridiem vero laborandum est, nisi occurit dominica.}\\\\"
 text_ordo += "\nµ & \\small{Ieiunium regulare cum abstinentia carnium.}\\\\"
 text_ordo += "\nł & \\small{Abstinentia carnium servanda secundum normas Declarationum nostrarum.}\\\\"
 text_ordo += "\nŧ & \\small{Prima dominica in mense: ad Completorium, dicitur antiphona Beatæ Mariæ Virginis in honorem Dominæ Nostræ Ephesini ad intentiones diocesis Smyrnensis (Izmir).}\\\\"
@@ -106,7 +106,7 @@ text_ordo += "\n£ & \\small{Prima feria VI in mense: fit expositio Sanctissimi 
 text_ordo += "\n§ & \\small{Primum sabbatum in mense.}\\\\"
 text_ordo += "\n & \\\\"
 text_ordo += "\n\\small{AM} & \\small{Antiphonale monasticum 1934.}\\\\"
-text_ordo += "\n\\small{CM} & \\small{Collectio Missarum de Beata Maria Virgine 1987 (numerus designat ordinem missarum).}\\\\"
+text_ordo += "\n\\small{CM} & \\small{Collectio Missarum de Beata Maria Virgine 1987 (numerus designat ordinem Missarum).}\\\\"
 text_ordo += "\n\\small{GR} & \\small{Graduale romanum 1974.}\\\\"
 text_ordo += "\n\\small{LS} & \\small{Lectionnaire de semaine 2014.}\\\\"
 text_ordo += "\n\\small{MC} & \\small{Missa conventualis.}\\\\"
@@ -196,7 +196,7 @@ text_ordo += "\n\\ApplyGenerList{\n\\item In sollemnitatibus et festis, psalmi s
 text_ordo += "\n\\ApplyGenerSubTitle{Ad Laudes et Vesperas}"
 text_ordo += "\n\\ApplyGenerList{\n\\item In officiis sanctorum, quando sumitur antiphona propria ad Benedictus vel ad Magnificat, dicendum est versiculum e Laudibus vel e II Vesperis de communi sanctorum aut de officio proprio, nisi aliter notetur.}"
 text_ordo += "\n\\ApplyGenerSubTitle{In ML}"
-text_ordo += "\n\\ApplyGenerList{\n\\item Paramenta celebrantis debent esse coloris convenientis Missæ diei aut alteræ Missæ celebrandæ (cf. \\textit{Rubricæ generales Missalis Romani} n. 117).\n\\item Color paramentorum, in Missis votivis, debet esse cuique Missæ conveniens; sed in missis votivis lectis IV classis non conventualibus, adhiberi potest etiam color Officii diei, servato tamen colore violaceo et nigro unice pro Missis quibus per se competit (\\textit{Rubricæ generales Missalis Romani} n. 323).\n\\item Missa votiva IV classis est Missa votiva quæ celebrari potest tantum in diebus liturgicis IV classis (\\textit{Rubricæ generales Missalis Romani} n. 387).\n\\item Præfatio de Martyribus dici potest in Missis festivis et votivis Sanctorum Martyrum, nisi aliter notetur.\n\\item Præfatio de Angelis dici potest in missis festivis et votivis Angelorum.\n\\item Missæ defunctorum IV classis sunt Missæ defunctorum «cotidianæ», quæ celebrari possunt, loco Missæ Officio diei respondentis, in feriis IV classis tantum, extra tempus natalicium. Maxime convenit ut hæ Missæ defunctorum IV classis tunc tantum dicantur cum revera pro defunctis, aut in genere aut certo designatis, applicantur (\\textit{Rubricæ generales Missalis Romani} n. 423). In Missis defunctorum «cotidianis» nigro colore utendum est.}"
+text_ordo += "\n\\ApplyGenerList{\n\\item Paramenta celebrantis debent esse coloris convenientis Missæ diei aut alteræ Missæ celebrandæ (cf. \\textit{Rubricæ generales Missalis Romani} n. 117).\n\\item Color paramentorum, in Missis votivis, debet esse cuique Missæ conveniens; sed in Missis votivis lectis IV classis non conventualibus, adhiberi potest etiam color Officii diei, servato tamen colore violaceo et nigro unice pro Missis quibus per se competit (\\textit{Rubricæ generales Missalis Romani} n. 323).\n\\item Missa votiva IV classis est Missa votiva quæ celebrari potest tantum in diebus liturgicis IV classis (\\textit{Rubricæ generales Missalis Romani} n. 387).\n\\item Præfatio de Martyribus dici potest in Missis festivis et votivis Sanctorum Martyrum, nisi aliter notetur.\n\\item Præfatio de Angelis dici potest in Missis festivis et votivis Angelorum.\n\\item Missæ defunctorum IV classis sunt Missæ defunctorum «cotidianæ», quæ celebrari possunt, loco Missæ Officio diei respondentis, in feriis IV classis tantum, extra tempus natalicium. Maxime convenit ut hæ Missæ defunctorum IV classis tunc tantum dicantur cum revera pro defunctis, aut in genere aut certo designatis, applicantur (\\textit{Rubricæ generales Missalis Romani} n. 423). In Missis defunctorum «cotidianis» nigro colore utendum est.}"
 text_ordo += "\n\\ApplyGenerSubTitle{In MC}"
 text_ordo += "\n\\ApplyGenerList{\n\\item In feriis cantatur præfatio in tono simplici, sed in memoriis minoribus in tono sollemni.\n\\item Per hebdomadam dicitur semper eadem præfatio, nisi aliter notetur.\\item Singulis diebus, omnes genuflectant ad consecrationem, et ante Communionem quando sacerdos dicit \\textit{Ecce Agnus Dei}. Diebus ieiunii vero, genuflectandum est ab acclamatione \\textit{Sanctus} expleta usque ad finem Precis eucharisticæ.\\item Oratio dominica cantatur in tono B in feriis Adventus et Quadragesimæ atque in Missis defunctorum. In sollemnitatibus vero maioribus cantatur in tono C. Reliquis diebus, usurpatur tonus A.}"
 text_ordo += "\n\\thispagestyle{empty}"
@@ -276,7 +276,7 @@ for i in range(nb_days):
         dict_new_day[
             "body"] += "\n\\item \\textit{Christifideli, qui orationem \\emph{En ego, o bone et dulcissime Iesu} coram Iesu Christi Crucifixi imagine, post communionem, pie recitet, conceditur indulgentia plenaria qualibet feria sexta temporis Quadragesimæ et temporis Passionis \\emph{(Enchiridion Indulgentiarum, concessio n. 22)}.}"
     elif new_day_date > date_paques - datetime.timedelta(days=46) and new_day_date < date_paques - datetime.timedelta(days=7) and new_day_date.weekday() == 4:
-        dict_new_day["body"] += "\\item \\textit{indulgentia plenaria pro recitatione orationis \\emph{En ego, o bone et dulcissime Iesu}.}"
+        dict_new_day["body"] += "\\item \\textit{Indulgentia plenaria pro recitatione orationis \\emph{En ego, o bone et dulcissime Iesu}.}"
 
     # Cas des féries avant l'Ascension : il faut ajouter dans le body le "Nihil fit de Rogationibus…" même en cas de sancto :
     if new_day_date > date_paques + datetime.timedelta(days=35) and new_day_date < date_paques + datetime.timedelta(days=39):
@@ -383,8 +383,9 @@ if (year == 2026):
 text_ordo += "\n\n\\end{document}"
 
 # Suppression des parenthèses restantes des f^etes 
-text_ordo = text_ordo.replace("()", "")
 text_ordo = text_ordo.replace("((", "")
+text_ordo = text_ordo.replace("()", "")
+text_ordo = text_ordo.replace(" - ) -", ") -")
 
 # Espaces avant les signes de ponctuation doubles :
 text_ordo = re.sub(r'([;:!?])', r'~\1', text_ordo)
