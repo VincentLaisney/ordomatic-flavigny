@@ -174,3 +174,9 @@ def f_mc_bmv(date_bmv, paques): # Renvoie le "body" de la messe BMV :
 				return(mc_bmv[current_month][num_sam].replace("\n\\item In MC", "\n\\item \\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo).\n\\item In MC"))
 		else:
 			return(mc_bmv[current_month][num_sam])
+
+def is_third_week_of_september(date):
+    sunday_before = (
+        date - datetime.timedelta(days=date.weekday() + 1)).day
+    return date.month == 9 and (15 <= sunday_before <= 21)
+

@@ -9,6 +9,8 @@ from pathlib import Path
 
 from tempo import *
 from sancto import *
+from flav import *
+from solign import *
 from lectiones import *
 from various import *
 
@@ -21,6 +23,8 @@ dict_tempo, ordo_start, nb_days, date_paques, nb_dim_ap_pentec, christ_roi = dic
     year, even_year, year_letter)
 dict_sancto = dict_sancto_create(
     year, even_year, year_letter, dict_tempo, date_paques, nb_dim_ap_pentec)
+dict_flav = dict_flav_create(year, even_year, dict_tempo)
+dict_solign = dict_solign_create(year, even_year, dict_tempo)
 
 # Entrer ici les dates des MC votives semailles et récoltes :
 date_semailles = datetime.date(year, 5, 12)
@@ -302,6 +306,16 @@ for i in range(nb_days):
         dict_new_day["generalities"] = dict_new_day["generalities"].replace(
             " cras benedictio de Pentecoste; a feria III", "") if not "de ea" in dict_new_day["header"] else dict_new_day["generalities"]
 
+    dict_new_day_flav = {}
+    dict_new_day_solign = {}
+    if new_day_date in dict_flav and dict_flav[new_day_date] != "":
+        if dict_flav[new_day_date]["force"] > dict_new_day["force"]:
+            dict_new_day_flav = dict_flav[new_day_date].copy()
+        
+    if new_day_date in dict_solign and dict_solign[new_day_date] != "":
+        if dict_solign[new_day_date]["force"] > dict_new_day["force"]:
+            dict_new_day_solign = dict_solign[new_day_date].copy()
+
     # IIe Vêpres : peuvent être les Ières Vêpres du jour suivant (auquel cas on opère le changement) :
     if i != nb_days - 1:
         next_day = new_day_date + datetime.timedelta(days=1)
@@ -352,6 +366,14 @@ for i in range(nb_days):
         "}" if dict_new_day["II_vesp"] == "" else "") if dict_new_day["body"] != "" else ""
     text_ordo += (("\n\\ApplyBody{\n" if dict_new_day["body"] == "" else "") +
                   dict_new_day["II_vesp"] + "}") if dict_new_day["II_vesp"] != "" else ""
+    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Flav~: }" + dict_new_day_flav["header"] + \
+        "}" if dict_new_day_flav != "" and "header" in dict_new_day_flav and dict_new_day_flav["header"] != "" else ""
+    text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_flav["body"] + \
+        "}" if dict_new_day_flav != "" and "body" in dict_new_day_flav and dict_new_day_flav["body"] != "" else ""
+    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Sol~: }" + dict_new_day_solign["header"] + \
+        "}" if dict_new_day_solign != "" and "header" in dict_new_day_solign and dict_new_day_solign["header"] != "" else ""
+    text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_solign["body"] + \
+        "}" if dict_new_day_solign != "" and "body" in dict_new_day_solign and dict_new_day_solign["body"] != "" else ""
     text_ordo += "\n\\ApplyLectHeader{" + dict_new_day["lectiones_header"] + \
         "}" if dict_new_day["lectiones_header"] != "" else ""
     text_ordo += "\n\\ApplyLectBody{" + dict_new_day["lectiones_body"] + \
