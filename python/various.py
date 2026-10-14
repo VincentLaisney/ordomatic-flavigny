@@ -34,7 +34,7 @@ ant_vepres_vendr_tp = {0: "\n\\item Ad Magnificat: ø \\textit{Quis est iste} cu
 octave_pentec = {1: {"body": "\n\\item Ad Vigilias, Laudes et Vesperas: hymni æstivi.\n\\item \\textit{In ML (Rub.): Missa infra octavam \\emph{(Credo)}.}\n\\item In MC: lectiones feriales."}, 2: {"body": "\n\\item \\textit{In ML (Rub.): Quatuor Temporum Pentecostes \\emph{(Credo)}.}"}, 3: {"body": "\n\\item \\textit{In ML (Rub.): Missa infra octavam \\emph{(Credo)}.}"}, 4: {"body": "\n\\item \\textit{In ML (Rub.): Quatuor Temporum Pentecostes \\emph{(Credo)}.}"}} 
 
 # 1er vendredi du mois per annum :
-first_vendr_mc = {1: "in MC (Alb.): Missa votiva de Dei Misericordia (MR 1158); præfatio communis II (in tono simplici).", 2: "in MC (Alb.): Missa votiva de sacratissimo Corde Iesu (MR 492 - GR 660); præfatio propria."}
+first_vendr_mc = {1: "In MC (Alb.): Missa votiva de Dei Misericordia (MR 1158); præfatio communis II (in tono simplici).", 2: "In MC (Alb.): Missa votiva de sacratissimo Corde Iesu (MR 492 - GR 660); præfatio propria."}
 
 # Mémoires BMV du samedi :
 mc_bmv = {}

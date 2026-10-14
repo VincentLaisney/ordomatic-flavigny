@@ -202,7 +202,7 @@ text_ordo += "\n\\ApplyGenerList{\n\\item In officiis sanctorum, quando sumitur 
 text_ordo += "\n\\ApplyGenerSubTitle{In ML}"
 text_ordo += "\n\\ApplyGenerList{\n\\item Paramenta celebrantis debent esse coloris convenientis Missæ diei aut alteræ Missæ celebrandæ (cf. \\textit{Rubricæ generales Missalis Romani} n. 117).\n\\item Color paramentorum, in Missis votivis, debet esse cuique Missæ conveniens; sed in Missis votivis lectis IV classis non conventualibus, adhiberi potest etiam color Officii diei, servato tamen colore violaceo et nigro unice pro Missis quibus per se competit (\\textit{Rubricæ generales Missalis Romani} n. 323).\n\\item Missa votiva IV classis est Missa votiva quæ celebrari potest tantum in diebus liturgicis IV classis (\\textit{Rubricæ generales Missalis Romani} n. 387).\n\\item Præfatio de Martyribus dici potest in Missis festivis et votivis Sanctorum Martyrum, nisi aliter notetur.\n\\item Præfatio de Angelis dici potest in Missis festivis et votivis Angelorum.\n\\item Missæ defunctorum IV classis sunt Missæ defunctorum «cotidianæ», quæ celebrari possunt, loco Missæ Officio diei respondentis, in feriis IV classis tantum, extra tempus natalicium. Maxime convenit ut hæ Missæ defunctorum IV classis tunc tantum dicantur cum revera pro defunctis, aut in genere aut certo designatis, applicantur (\\textit{Rubricæ generales Missalis Romani} n. 423). In Missis defunctorum «cotidianis» nigro colore utendum est.}"
 text_ordo += "\n\\ApplyGenerSubTitle{In MC}"
-text_ordo += "\n\\ApplyGenerList{\n\\item In feriis cantatur præfatio in tono simplici, sed in memoriis minoribus in tono sollemni.\n\\item Per hebdomadam dicitur semper eadem præfatio, nisi aliter notetur.\\item Singulis diebus, omnes genuflectant ad consecrationem, et ante Communionem quando sacerdos dicit \\textit{Ecce Agnus Dei}. Diebus ieiunii vero, genuflectandum est ab acclamatione \\textit{Sanctus} expleta usque ad finem Precis eucharisticæ.\\item Oratio dominica cantatur in tono B in feriis Adventus et Quadragesimæ atque in Missis defunctorum. In sollemnitatibus vero maioribus cantatur in tono C. Reliquis diebus, usurpatur tonus A.}"
+text_ordo += "\n\\ApplyGenerList{\n\\item In feriis cantatur præfatio in tono simplici, sed in memoriis minoribus in tono sollemni.\n\\item Per hebdomadam dicitur semper eadem præfatio, nisi aliter notetur.\\item Singulis diebus, omnes genuflectant inde ab epiclesi usque ad ostensionem calicis, et ante Communionem quando sacerdos dicit \\textit{Ecce Agnus Dei}. Diebus ieiunii vero, genuflectandum est ab acclamatione \\textit{Sanctus} expleta usque ad finem Precis eucharisticæ.\\item Oratio dominica cantatur in tono B in feriis Adventus et Quadragesimæ atque in Missis defunctorum. In sollemnitatibus vero maioribus cantatur in tono C. Reliquis diebus, usurpatur tonus A.}"
 text_ordo += "\n\\thispagestyle{empty}"
 text_ordo += "\n\\vspace{1cm}\\ApplyGenerTitleLarge{Advertenda}\\par"
 text_ordo += "\n\\setlength{\\parindent}{0.5cm}"
@@ -301,6 +301,9 @@ for i in range(nb_days):
     dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + (
         "\n\\item In MC: Missa \\textit{post collectos fructus terræ} (MR 1129 - GR 654); præfatio V de dominicis per annum." if new_day_date == date_recoltes else "")
 
+    # Prière pour le Saint-Père le jour anniversaire de son élection : on ajoute le texte après le body éventuellement existant.
+    dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + (dict_sancto[new_day_date]["body"] if new_day_date in dict_sancto and "body" in dict_sancto[new_day_date] and "anniv_pape" in dict_sancto[new_day_date] and dict_sancto[new_day_date]["anniv_pape"] == True else "")
+        
     # Lundi de Pentecôte : "Ad mensam" sans mention de Pentecôte si c'est festum et supra :
     if new_day_date == date_paques + datetime.timedelta(days=50):
         dict_new_day["generalities"] = dict_new_day["generalities"].replace(
@@ -326,6 +329,14 @@ for i in range(nb_days):
             force_sancto_next = dict_sancto[next_day]["force"] if "force" in dict_sancto[next_day] else 0
             if force_sancto_next > dict_new_day["force"] and "I_vesp" in dict_sancto[next_day]:
                 dict_new_day["II_vesp"] = dict_sancto[next_day]["I_vesp"]
+        if next_day in dict_flav and dict_flav[next_day] != "":
+            force_flav_next = dict_flav[next_day]["force"] if "force" in dict_flav[next_day] else 0
+            if force_flav_next > dict_new_day["force"] and "I_vesp" in dict_flav[next_day]:
+                dict_new_day_flav["II_vesp"] = dict_flav[next_day]["I_vesp"]
+        if next_day in dict_solign and dict_solign[next_day] != "":
+            force_solign_next = dict_solign[next_day]["force"] if "force" in dict_solign[next_day] else 0
+            if force_solign_next > dict_new_day["force"] and "I_vesp" in dict_solign[next_day]:
+                dict_new_day_solign["II_vesp"] = dict_solign[next_day]["I_vesp"]
     else:
         # Le dernier samedi de l'année liturgique, les IIe Vêpres sont les Ières Vêpres de l'année suivante.
         dict_new_day["II_vesp"] = ""
@@ -366,14 +377,20 @@ for i in range(nb_days):
         "}" if dict_new_day["II_vesp"] == "" else "") if dict_new_day["body"] != "" else ""
     text_ordo += (("\n\\ApplyBody{\n" if dict_new_day["body"] == "" else "") +
                   dict_new_day["II_vesp"] + "}") if dict_new_day["II_vesp"] != "" else ""
-    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Flav~: }" + dict_new_day_flav["header"] + \
+    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Flav.: }" + dict_new_day_flav["header"] + \
         "}" if dict_new_day_flav != "" and "header" in dict_new_day_flav and dict_new_day_flav["header"] != "" else ""
+    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Flav.:}}" if dict_new_day_flav != "" and "header" not in dict_new_day_flav and "II_vesp" in dict_new_day_flav and dict_new_day_flav["II_vesp"] != "" else ""
     text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_flav["body"] + \
-        "}" if dict_new_day_flav != "" and "body" in dict_new_day_flav and dict_new_day_flav["body"] != "" else ""
-    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Sol~: }" + dict_new_day_solign["header"] + \
+        (dict_new_day_flav["II_vesp"] if "II_vesp" in dict_new_day_flav and dict_new_day_flav["II_vesp"] != "" else "") + "}" if dict_new_day_flav != "" and "body" in dict_new_day_flav and dict_new_day_flav["body"] != "" else ""
+    text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_flav["II_vesp"] + \
+        "}" if dict_new_day_flav != "" and "body" not in dict_new_day_flav and "II_vesp" in dict_new_day_flav and dict_new_day_flav["II_vesp"] != "" else ""
+    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Sol.: }" + dict_new_day_solign["header"] + \
         "}" if dict_new_day_solign != "" and "header" in dict_new_day_solign and dict_new_day_solign["header"] != "" else ""
+    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Sol.:}}" if dict_new_day_solign != "" and "header" not in dict_new_day_solign and "II_vesp" in dict_new_day_solign and dict_new_day_solign["II_vesp"] != "" else ""
     text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_solign["body"] + \
-        "}" if dict_new_day_solign != "" and "body" in dict_new_day_solign and dict_new_day_solign["body"] != "" else ""
+        (dict_new_day_solign["II_vesp"] if "II_vesp" in dict_new_day_solign and dict_new_day_solign["II_vesp"] != "" else "") + "}" if dict_new_day_solign != "" and "body" in dict_new_day_solign and dict_new_day_solign["body"] != "" else ""
+    text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_solign["II_vesp"] + \
+        "}" if dict_new_day_solign != "" and "body" not in dict_new_day_solign and "II_vesp" in dict_new_day_solign and dict_new_day_solign["II_vesp"] != "" else ""
     text_ordo += "\n\\ApplyLectHeader{" + dict_new_day["lectiones_header"] + \
         "}" if dict_new_day["lectiones_header"] != "" else ""
     text_ordo += "\n\\ApplyLectBody{" + dict_new_day["lectiones_body"] + \
@@ -387,18 +404,16 @@ text_ordo += "\n\\ApplyParBox{2cm}{}\n\\ApplyHebdoPsalt{\\textbf{Post Nonam expl
     str(year - 1) + "-" + str(year) + "}}"
 
 # Jubilés :
-if (year == 2026):
+if (year == 2027):
     text_ordo += "\n\n\\newpage"
     text_ordo += "\n\n\\thispagestyle{empty}"
     text_ordo += "\n\\ApplyParBox{3cm}{}"
     text_ordo += "\n\\ApplyGenerTitleHuge{IUBILÆUM}\\vspace{1cm}"
-    text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno celebrabunt:}"
+    text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno celebrabit:}"
     text_ordo += "\n\\begin{center}"
     text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
-    text_ordo += "\nDie 6 martii 2026 :\\par"
-    text_ordo += "\nFrater Gabriel Maria \\textsc{Delaunay} (50 Prof.)\\vspace{0.5cm}\\par"
-    text_ordo += "\nDie 21 iulii 2026 :\\par"
-    text_ordo += "\nR.~P. Dominicus Maria \\textsc{Vernet} (50 Prof.)\\par"
+    text_ordo += "\nDie 28 augusti 2027 :\\par"
+    text_ordo += "\nR.~P. Vincentius Maria \\textsc{Laisney} (50 Prof.)\\vspace{0.5cm}\\par"
     text_ordo += "\n\\end{center}"
 
 # End of document :
