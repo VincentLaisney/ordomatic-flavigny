@@ -27,7 +27,7 @@ dict_flav = dict_flav_create(year, even_year, dict_tempo)
 dict_solign = dict_solign_create(year, even_year, dict_tempo)
 
 # Entrer ici les dates des MC votives semailles et récoltes :
-date_semailles = datetime.date(year, 5, 12)
+date_semailles = datetime.date(year, 5, 4)
 date_recoltes = datetime.date(year, 9, 22)
 
 text_ordo = "\\input{../latex/config.tex}"
@@ -100,14 +100,16 @@ text_ordo += "\n\\newpage"
 text_ordo += "\n\\thispagestyle{empty}"
 text_ordo += "\n\\ApplyParBox{0cm}{\\ApplyGenerTitleLarge{Clavis signorum}\n \\ApplyGenerTitleLarge{et abbreviationum}}"
 text_ordo += "\n\\setlength{\\tabcolsep}{0cm}"
-text_ordo += "\n\\begin{tabular}{p{1cm} p{7.5cm}}"
+text_ordo += "\n\\begin{tabular}{p{1.2cm} p{7.3cm}}"
 text_ordo += "\n¬ & \\small{Festum de præcepto.}\\\\"
-text_ordo += "\nþ & \\small{Festum cum tempore usque ad Nonam de præcepto, postmeridiem vero laborandum est, nisi occurit dominica.}\\\\"
+text_ordo += "\nþ & \\small{Festum cum tempore usque ad Nonam de præcepto, postmeridiem vero laborandum est, nisi occurrit dominica.}\\\\"
 text_ordo += "\nµ & \\small{Ieiunium regulare cum abstinentia carnium.}\\\\"
 text_ordo += "\nł & \\small{Abstinentia carnium servanda secundum normas Declarationum nostrarum.}\\\\"
-text_ordo += "\nŧ & \\small{Prima dominica in mense: ad Completorium, dicitur antiphona Beatæ Mariæ Virginis in honorem Dominæ Nostræ Ephesini ad intentiones diocesis Smyrnensis (Izmir).}\\\\"
+text_ordo += "\nŧ & \\small{Prima dominica in mense: ad Completorium, dicitur antiphona Beatæ Mariæ Virginis in honorem Dominæ Nostræ Ephesinæ ad intentiones diocesis Smyrnensis (Izmir).}\\\\"
 text_ordo += "\n£ & \\small{Prima feria VI in mense: fit expositio Sanctissimi Sacramenti, in honorem Sacratissimi Cordis Iesu, a Vigiliis usque ad Completorium.}\\\\"
 text_ordo += "\n§ & \\small{Primum sabbatum in mense.}\\\\"
+text_ordo += "\n\\small{Ⓕ} & \\small{Proprium Flaviniaci.}\\\\"
+text_ordo += "\n\\small{Ⓢ} & \\small{Proprium Solemniaci.}\\\\"
 text_ordo += "\n & \\\\"
 text_ordo += "\n\\small{AM} & \\small{Antiphonale monasticum 1934.}\\\\"
 text_ordo += "\n\\small{CM} & \\small{Collectio Missarum de Beata Maria Virgine 1987 (numerus designat ordinem Missarum).}\\\\"
@@ -118,7 +120,7 @@ text_ordo += "\n\\small{ML} & \\small{Missæ lectæ 1962.}\\\\"
 text_ordo += "\n\\small{MP} & \\small{Missæ Propriæ OSB 1976.}\\\\"
 text_ordo += "\n\\small{MR} & \\small{Missale romanum 2002.}\\\\"
 text_ordo += "\n\\small{Or.} & \\small{Oratio universalis.}\\\\"
-text_ordo += "\n\\small{SO} & \\small{Lectiones de Scriptura occurenti in I Nocturno.}\\\\"
+text_ordo += "\n\\small{SO} & \\small{Lectiones de Scriptura occurrenti in I Nocturno.}\\\\"
 text_ordo += "\n\\end{tabular}\n"
 text_ordo += "\n\\newpage"
 text_ordo += "\n\\thispagestyle{empty}"
@@ -377,16 +379,17 @@ for i in range(nb_days):
         "}" if dict_new_day["II_vesp"] == "" else "") if dict_new_day["body"] != "" else ""
     text_ordo += (("\n\\ApplyBody{\n" if dict_new_day["body"] == "" else "") +
                   dict_new_day["II_vesp"] + "}") if dict_new_day["II_vesp"] != "" else ""
-    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Flav.: }" + dict_new_day_flav["header"] + \
+    text_ordo += "\n\\ApplyHeaderLocal{Ⓕ}{\\item " + dict_new_day_flav["header"] + \
         "}" if dict_new_day_flav != "" and "header" in dict_new_day_flav and dict_new_day_flav["header"] != "" else ""
-    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Flav.:}}" if dict_new_day_flav != "" and "header" not in dict_new_day_flav and "II_vesp" in dict_new_day_flav and dict_new_day_flav["II_vesp"] != "" else ""
+    text_ordo += "\n\\ApplyHeaderLocal{Ⓕ}{\\item }" if dict_new_day_flav != "" and "header" not in dict_new_day_flav and "II_vesp" in dict_new_day_flav and dict_new_day_flav["II_vesp"] != "" else ""
     text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_flav["body"] + \
         (dict_new_day_flav["II_vesp"] if "II_vesp" in dict_new_day_flav and dict_new_day_flav["II_vesp"] != "" else "") + "}" if dict_new_day_flav != "" and "body" in dict_new_day_flav and dict_new_day_flav["body"] != "" else ""
+    # Essai sans ApplyBodyLocal
     text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_flav["II_vesp"] + \
         "}" if dict_new_day_flav != "" and "body" not in dict_new_day_flav and "II_vesp" in dict_new_day_flav and dict_new_day_flav["II_vesp"] != "" else ""
-    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Sol.: }" + dict_new_day_solign["header"] + \
+    text_ordo += "\n\\ApplyHeaderLocal{Ⓢ}{\\item " + dict_new_day_solign["header"] + \
         "}" if dict_new_day_solign != "" and "header" in dict_new_day_solign and dict_new_day_solign["header"] != "" else ""
-    text_ordo += "\n\\ApplyHeaderLocal{\\item \\textbf{Sol.:}}" if dict_new_day_solign != "" and "header" not in dict_new_day_solign and "II_vesp" in dict_new_day_solign and dict_new_day_solign["II_vesp"] != "" else ""
+    text_ordo += "\n\\ApplyHeaderLocal{Ⓢ}{\\item }" if dict_new_day_solign != "" and "header" not in dict_new_day_solign and "II_vesp" in dict_new_day_solign and dict_new_day_solign["II_vesp"] != "" else ""
     text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_solign["body"] + \
         (dict_new_day_solign["II_vesp"] if "II_vesp" in dict_new_day_solign and dict_new_day_solign["II_vesp"] != "" else "") + "}" if dict_new_day_solign != "" and "body" in dict_new_day_solign and dict_new_day_solign["body"] != "" else ""
     text_ordo += "\n\\ApplyBodyLocal{" + dict_new_day_solign["II_vesp"] + \
@@ -407,14 +410,18 @@ text_ordo += "\n\\ApplyParBox{2cm}{}\n\\ApplyHebdoPsalt{\\textbf{Post Nonam expl
 if (year == 2027):
     text_ordo += "\n\n\\newpage"
     text_ordo += "\n\n\\thispagestyle{empty}"
-    text_ordo += "\n\\ApplyParBox{3cm}{}"
+    text_ordo += "\n\\ApplyParBox{2cm}{}"
     text_ordo += "\n\\ApplyGenerTitleHuge{IUBILÆUM}\\vspace{1cm}"
-    text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno celebrabit:}"
-    text_ordo += "\n\\begin{center}"
-    text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
-    text_ordo += "\nDie 28 augusti 2027 :\\par"
-    text_ordo += "\nR.~P. Vincentius Maria \\textsc{Laisney} (50 Prof.)\\vspace{0.5cm}\\par"
-    text_ordo += "\n\\end{center}"
+    text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno 2027 celebrabunt:}"
+    text_ordo += "\n\\medskip\n\\fontsize{12}{18}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
+    text_ordo += "\n\\IubilaeumEntry{Die 26 iunii:}{ R.~P. Michael Maria \\textsc{Caillaud} & L Sac. \\\\ }"
+    text_ordo += "\n\\IubilaeumEntry{Die 6 iulii:}"
+    text_ordo += "{ T.~R.~P. Ioannes Bernardus Maria \\textsc{Bories} & XXV Sac. \\\\ "
+    text_ordo += "R.~P. Pius Maria \\textsc{Noonan} & XXV Sac. \\\\ "
+    text_ordo += "R.~P. Benignus Maria \\textsc{Gaillot-Drevon} & XXV Sac. \\\\ }"
+    text_ordo += "\n\\IubilaeumEntry{Die 22 iulii:}{ R.~P. Elias Maria \\textsc{Petitdemange} & XXV Prof. \\\\ }"
+    text_ordo += "\n\\IubilaeumEntry{Die 28 augusti:}{ R.~P. Vincentius Maria \\textsc{Laisney} & L Prof. \\\\ }"
+    text_ordo += "\n\\IubilaeumEntry{Die 23 octobris :\\par}{ R.~P. Petrus Maria \\textsc{Joly} & LX Prof. \\\\ }"
 
 # End of document :
 text_ordo += "\n\n\\end{document}"

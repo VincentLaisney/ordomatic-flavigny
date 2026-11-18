@@ -22,7 +22,7 @@ def dict_flav_create(current_year, even_year, dict_tempo):
     dedicace_dijon["force"] = 70
     dedicace_dijon["header"] = "\\textbf{\\textsc{In Dedicatione Ecclesiæ Cathedralis Divionensis}} - \\textbf{festum} - \\textit{Alb.}"
     dedicace_dijon[
-        "body"] = "\n\\item Omnia de Communi dedicationis ecclesiæ ritu paschali: in fine cuiuslibet responsorii, ante versum, additur \\textit{Alleluia} nisi iam habeatur.\n\\item \\textit{In ML: præfatio in dedicatione ecclesiæ \\emph{(Gloria, Credo)}.}\n\\item In MC: Missa de Communi dedicationis ecclesiæ (MR 895); lectiones propriæ: Apoc \\textbf{21}, 1-5a / Io \\textbf{2}, 13-22; præfatio in dedicatione ecclesiæ II."
+        "body"] = "\n\\item Omnia de Communi dedicationis ecclesiæ ritu paschali: in fine cuiuslibet responsorii, ante versum, additur \\textit{Alleluia} nisi iam habeatur.\n\\item \\textit{In ML: dicitur \\emph{Credo}; præfatio de dedicatione ecclesiæ.}\n\\item In MC: Missa de Communi dedicationis ecclesiæ (MR 895); lectiones propriæ: Apoc \\textbf{21}, 1-5a / Io \\textbf{2}, 13-22; præfatio de dedicatione ecclesiæ II."
 
     sainte_reine_date = datetime.date(current_year, 9, 7)
     sainte_reine = dict_flav[sainte_reine_date] = {}
@@ -79,6 +79,9 @@ def dict_flav_create(current_year, even_year, dict_tempo):
         hebdo_psalterii_inv[even_year]
     saint_benigne["body"] = "\n\\item In Officio: omnia de Communi unius martyris; oratio in supplemento 188.\n\\item Ad Vigilias: invitatorium proprium in supplemento 59; hymnus in supplemento 185" + inv_sem_vigiles + \
         "; lectiones I et II Nocturnorum in supplemento 185*.\n\\item \\textit{In ML: Missa et præfatio propriæ (olim die 20 novembris; non dicitur \\emph{Credo}).}\n\\item In MC: oratio propria; Commune martyrum (MR 915); lectiones propriæ: 1 Thes \\textbf{2}, 2-8 / Mc \\textbf{16}, 15-18; præfatio de sanctis martyribus."
+    if saint_benigne_date.weekday() == 5: # saturday
+        saint_benigne["body"] += "\n\\item I Vesperæ dominicæ sequentis."
+
 
     sainte_catherine_laboure_date = datetime.date(current_year, 11, 25)
     sainte_catherine_laboure = dict_flav[sainte_catherine_laboure_date] = {}
