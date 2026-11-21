@@ -24,6 +24,14 @@ def dict_flav_create(current_year, even_year, dict_tempo):
     dedicace_dijon[
         "body"] = "\n\\item Omnia de Communi dedicationis ecclesiæ ritu paschali: in fine cuiuslibet responsorii, ante versum, additur \\textit{Alleluia} nisi iam habeatur.\n\\item \\textit{In ML: dicitur \\emph{Credo}; præfatio de dedicatione ecclesiæ.}\n\\item In MC: Missa de Communi dedicationis ecclesiæ (MR 895); lectiones propriæ: Apoc \\textbf{21}, 1-5a / Io \\textbf{2}, 13-22; præfatio de dedicatione ecclesiæ II."
 
+    saint_bernard_date = datetime.date(current_year, 8, 20)
+    saint_bernard = dict_flav[saint_bernard_date] = {}
+    saint_bernard["force"] = 70
+    saint_bernard["header"] = " - \\textbf{\\textsc{S. Bernardi, abbatis et Ecclesiæ doctoris}} - \\textbf{festum} - \\textit{Alb.}"
+    # lectures_mc = "Cant \\textbf{8}, 6-7" if even_year else "Sir \\textbf{2}, 1-9"
+    saint_bernard[
+        "body"] = "\n\\item Ut supra; lectiones in folio supplementi."
+
     sainte_reine_date = datetime.date(current_year, 9, 7)
     sainte_reine = dict_flav[sainte_reine_date] = {}
     sainte_reine["force"] = 100

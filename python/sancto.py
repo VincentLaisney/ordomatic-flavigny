@@ -1767,11 +1767,11 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
 
     saint_bernard_date = datetime.date(current_year, 8, 20)
     saint_bernard = dict_sancto[saint_bernard_date] = {}
-    saint_bernard["force"] = 70
-    saint_bernard["header"] = " - \\textbf{\\textsc{S. Bernardi, abbatis et Ecclesiæ doctoris}} - \\textbf{festum} - \\textit{Alb.}"
+    saint_bernard["force"] = 40
+    saint_bernard["header"] = " - \\textsc{S. Bernardi}, abbatis et Ecclesiæ doctoris - \\textbf{memoria maior} - \\textit{Alb.}"
     # lectures_mc = "Cant \\textbf{8}, 6-7" if even_year else "Sir \\textbf{2}, 1-9"
     saint_bernard[
-        "body"] = "\n\\item Ad Vigilias: hymnus proprius; lectiones in folio supplementi.\n\\item Ad Laudes: hymnus proprius et antiphona ad Benedictus propria.\n\\item \\textit{In ML: Missa in PAL.}\n\\item In MC: lectiones propriæ: Si \\textbf{15}, 1-6 / Io \\textbf{17}, 20-26; præfatio de sanctis pastoribus."
+        "body"] = "\n\\item Ad Vigilias, Laudes et Vesperas: hymnus proprius.\n\\item Ad Laudes ø ad Benedictus propria.\n\\item \\textit{In ML: Missa in PAL.}\n\\item In MC: lectiones propriæ: Si \\textbf{15}, 1-6 / Io \\textbf{17}, 20-26; præfatio de sanctis pastoribus."
     saint_bernard["II_vesp"] = "\n\\item Ad Vesperas: hymnus proprius."
 
     saint_pie_X_date = datetime.date(current_year, 8, 21)
